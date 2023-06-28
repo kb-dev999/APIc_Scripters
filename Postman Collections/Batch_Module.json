@@ -245,61 +245,6 @@
 					"response": []
 				},
 				{
-					"name": "Neg Get Batch by ID",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"id": "0ca43640-c09b-4fad-8017-f565bec817cc",
-								"exec": [
-									"pm.test(\"Status code is 404\", function () {",
-									"    pm.response.to.have.status(404);",
-									"});",
-									"",
-									"//check BatchID present",
-									"pm.test(\"Check Batch id present in response body\", () =>{",
-									"    //var jsonData=pm.response.json();",
-									"    //pm.expect(jsonData.batchId).to.eql(pm.globals.get(\"APIBatchID\"));",
-									"    var jsonData=pm.response.json();",
-									"    pm.expect(pm.response.text()).to.contain(pm.globals.get(\"APIBatchID\"));",
-									"    pm.expect(pm.response.text()).to.include(\"Batch not found\");",
-									"    pm.expect(pm.response.text()).to.include(\"message\");",
-									"    pm.expect(pm.response.text()).to.include(\"success\", false);",
-									"});",
-									"",
-									"//Check Header is present or not",
-									"pm.test(\"Content-Type Header is present\", () => {",
-									"    pm.response.to.have.header(\"Content-Type\");",
-									"});",
-									"",
-									"//Check Header Value",
-									"pm.test(\"Content-Type Header is application-json\", () => {",
-									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
-									"});",
-									"",
-									"//Check Response Time",
-									"pm.test(\"Response Time is less than 500ms\", () => {",
-									"    pm.expect(pm.response.responseTime).to.be.below(500);",
-									"});",
-									"",
-									""
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"id": "544fb008-67ca-4628-95ce-44ef0eadcc91",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": "{{baseurl}}/batches/batchId/{{APIBatchID}}"
-					},
-					"response": []
-				},
-				{
 					"name": "Get Batch by Name",
 					"event": [
 						{
@@ -523,6 +468,77 @@
 						"method": "GET",
 						"header": [],
 						"url": "{{baseurl}}/batches/program/{{BatchProgramID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Neg Get Batch by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "0ca43640-c09b-4fad-8017-f565bec817cc",
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {",
+									"    pm.response.to.have.status(404);",
+									"});",
+									"",
+									"//check BatchID present",
+									"pm.test(\"Check Batch id present in response body\", () =>{",
+									"    //var jsonData=pm.response.json();",
+									"    //pm.expect(jsonData.batchId).to.eql(pm.globals.get(\"APIBatchID\"));",
+									"    var jsonData=pm.response.json();",
+									"    //pm.expect(pm.response.text()).to.contain(pm.globals.get(\"APIBatchID\"));",
+									"    pm.expect(pm.response.text()).to.include(\"Batch not found\");",
+									"    pm.expect(pm.response.text()).to.include(\"message\");",
+									"    pm.expect(pm.response.text()).to.include(\"success\", false);",
+									"});",
+									"",
+									"//Check Header is present or not",
+									"pm.test(\"Content-Type Header is present\", () => {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"//Check Header Value",
+									"pm.test(\"Content-Type Header is application-json\", () => {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
+									"});",
+									"",
+									"//Check Response Time",
+									"pm.test(\"Response Time is less than 500ms\", () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "544fb008-67ca-4628-95ce-44ef0eadcc91",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/batches/batchId/:batchId",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"batches",
+								"batchId",
+								":batchId"
+							],
+							"variable": [
+								{
+									"key": "batchId",
+									"value": "7389"
+								}
+							]
+						}
 					},
 					"response": []
 				},
@@ -2238,93 +2254,93 @@
 	],
 	"variable": [
 		{
-			"id": "e0e4a77c-7035-46d6-b7ae-c1aa965a633d",
+			"id": "460e026a-e784-4840-8622-09f984cd7442",
 			"key": "batchID",
 			"value": "2",
 			"disabled": true
 		},
 		{
-			"id": "a5ee85e4-a29a-4a13-86c3-1ee482ac1916",
+			"id": "f093b1a3-d7c5-4c8a-bdf2-039fcd1bea29",
 			"key": "batchName",
 			"value": "SDET",
 			"disabled": true
 		},
 		{
-			"id": "0081105c-3e70-48d8-9a70-442465066ea0",
+			"id": "c44279bf-723e-4870-ad19-18dd59ee7554",
 			"key": "programID",
 			"value": "1",
 			"disabled": true
 		},
 		{
-			"id": "46c8bd51-f236-434c-bf19-2e46ea1361c2",
+			"id": "f4861575-acd2-43d7-9c3c-b55b9ef527c1",
 			"key": "NegbatchID",
 			"value": "50",
 			"disabled": true
 		},
 		{
-			"id": "1f662b3f-4bbd-4904-ab3c-989d571b7f58",
+			"id": "347829c9-c3dc-4335-b97e-7b75f41228cd",
 			"key": "NegbatchName",
 			"value": "java",
 			"disabled": true
 		},
 		{
-			"id": "da2da05f-56b5-42fc-b92a-9364cec35ba3",
+			"id": "ae20b16c-e597-44f5-9021-1369a8a606c7",
 			"key": "NegprogramID",
 			"value": "10",
 			"disabled": true
 		},
 		{
-			"id": "d617602f-55ce-40a2-8a5e-3a44601f4d85",
+			"id": "0c3b7f52-8b5f-4e09-a20c-3d1174799216",
 			"key": "batchDescription",
 			"value": ""
 		},
 		{
-			"id": "893e08bb-ae47-4262-b818-76fd23028e91",
+			"id": "94e58115-94fa-47d8-af75-4bf02949e272",
 			"key": "batchNoOfClasses",
 			"value": ""
 		},
 		{
-			"id": "14d4a37d-ac4a-4acd-86f3-153dd5466ba9",
+			"id": "b33b8162-14e1-46a5-a20c-55dd3a3e5167",
 			"key": "batchStatus",
 			"value": ""
 		},
 		{
-			"id": "b388d9de-7ff8-49e6-bbc3-7821ebfaae95",
+			"id": "9772dea8-e8ba-4fac-94f1-169db576f127",
 			"key": "programId",
 			"value": ""
 		},
 		{
-			"id": "157e3a17-c44d-43ed-970c-157d8aa17af0",
+			"id": "3f2a07a4-46ba-4a17-8f2d-a894b0d9b338",
 			"key": "batchName",
 			"value": ""
 		},
 		{
-			"id": "f8bc9ecb-36d0-4505-b7a4-232a53546dc4",
+			"id": "5579b1c4-c7db-4137-befa-6d4dbe458100",
 			"key": "UpdatebatchName",
 			"value": ""
 		},
 		{
-			"id": "eac625fe-7bde-4c04-a075-72e88208915f",
+			"id": "61439f2b-111a-45b6-99f6-31bcd694763f",
 			"key": "UpdatebatchNoOfClasses",
 			"value": ""
 		},
 		{
-			"id": "83aa2e00-2c2a-4c5c-912c-0a0880e5cb0a",
+			"id": "3f973c9b-aee7-4246-84ba-dad2cb3abff7",
 			"key": "UpdatebatchStatus",
 			"value": ""
 		},
 		{
-			"id": "b4c91954-a8b3-448f-9af6-bab9c2118cc2",
+			"id": "afbcc31a-d69c-47ac-ae87-1610d36b9f42",
 			"key": "UpdateprogramId",
 			"value": ""
 		},
 		{
-			"id": "fc0e1253-88a4-4808-b778-97b849be3869",
+			"id": "91f5f237-057d-4e77-ab11-9d2778f7a14f",
 			"key": "programName",
 			"value": ""
 		},
 		{
-			"id": "43ff9674-0adb-4725-8edc-e85cc2f9f21d",
+			"id": "1b30ac1d-5503-4b29-9e48-d2396a2f1a47",
 			"key": "NewprogramId",
 			"value": ""
 		}
