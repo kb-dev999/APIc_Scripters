@@ -50,17 +50,15 @@
 									"});",
 									"",
 									"//Validate Response body content",
-									"//const response = pm.response.json();",
-									"//pm.test(\"Test Response Body Values\",() => {",
-									"    // pm.expect(response).to.include.nested.property(\"batchid\", 314);",
-									"   //pm.expect(jsonData.data.batchName).is.to.equal(\"Jun23-APIc Scripters-DA-27-008\");",
-									"   // pm.expect(jsonData[1].programName).to.eql(\"mathsupdating1\");",
-									"   // pm.expect(jsonData[1].batchId).to.eql(1);",
-									"   // pm.expect(jsonData[1].batchDescription).to.eql(\"string\");",
-									"   // pm.expect(jsonData[1].batchStatus).to.eql(\"Active\");",
-									"   // pm.expect(jsonData[1].batchNoOfClasses).to.eql(5);",
-									"  //  pm.expect(jsonData[1].programId).to.eql(1);",
-									"//});",
+									"var jsonData = JSON.parse(responseBody);",
+									"var filteredData = jsonData.filter(function(item) {",
+									"  if (!item.batchName) {",
+									"    return",
+									"  }",
+									"  return item.batchName.includes(\"Jun23-APIc\");",
+									"});",
+									"console.log(\"filteredData\", filteredData);",
+									"",
 									"",
 									"",
 									"//Validating JSON Schema",
@@ -2365,93 +2363,93 @@
 	],
 	"variable": [
 		{
-			"id": "09f83d63-1f87-45b5-bd62-ab1cba05579e",
+			"id": "9d9f4d3a-ecc7-4cce-948a-2fe3dd587ee0",
 			"key": "batchID",
 			"value": "2",
 			"disabled": true
 		},
 		{
-			"id": "8eb55b61-a635-4619-a10f-bfdc32443ed4",
+			"id": "a99e3183-a958-4b89-a350-5877599879e0",
 			"key": "batchName",
 			"value": "SDET",
 			"disabled": true
 		},
 		{
-			"id": "2a61c2a2-7946-48f8-aec3-4152e2f1d584",
+			"id": "7ccae242-a383-41bc-b481-76f185b3d9d3",
 			"key": "programID",
 			"value": "1",
 			"disabled": true
 		},
 		{
-			"id": "ce04cfaa-2e65-4655-bc92-a087008b7b85",
+			"id": "61d02099-6b10-488f-9cd9-d31ce1d178a4",
 			"key": "NegbatchID",
 			"value": "50",
 			"disabled": true
 		},
 		{
-			"id": "6b20bb10-3d7d-4730-9e6f-ec2ee587b92c",
+			"id": "34df105b-c3cb-40bc-a287-4309167b70fd",
 			"key": "NegbatchName",
 			"value": "java",
 			"disabled": true
 		},
 		{
-			"id": "ae90bd8a-b9c5-455e-8765-504b861e935b",
+			"id": "18f62d4d-1fc0-4b2a-a273-fec385104e69",
 			"key": "NegprogramID",
 			"value": "10",
 			"disabled": true
 		},
 		{
-			"id": "f445369c-c984-4a03-a0fe-5a26933b5ced",
+			"id": "cde41cfb-2655-475c-911b-f164450610a6",
 			"key": "batchDescription",
 			"value": ""
 		},
 		{
-			"id": "594dac15-cdc8-4c25-bb7d-171f81455bb3",
+			"id": "fc9d3e6a-6a81-429b-8cb1-92b27a995ec8",
 			"key": "batchNoOfClasses",
 			"value": ""
 		},
 		{
-			"id": "73458f6d-0af6-47b3-882f-0015d9e1a4ad",
+			"id": "2860c162-4bce-46b3-8238-ed3c30915248",
 			"key": "batchStatus",
 			"value": ""
 		},
 		{
-			"id": "64e6756b-b794-4f6e-8d3d-49942b955a3b",
+			"id": "e6d88a78-a186-4266-8761-3b2a11b77363",
 			"key": "programId",
 			"value": ""
 		},
 		{
-			"id": "b8f8847e-5997-44d3-a2fa-b312e6902c8c",
+			"id": "bf580cba-e771-447d-b620-b5d9dd6642f5",
 			"key": "batchName",
 			"value": ""
 		},
 		{
-			"id": "931367c1-58b8-4956-8f0b-7b244ab990cf",
+			"id": "b13c0b0d-b6cf-4edf-9385-ffa9afd76c1b",
 			"key": "UpdatebatchName",
 			"value": ""
 		},
 		{
-			"id": "529f4958-dcd2-4af0-9bd8-e81b9a4fc453",
+			"id": "40abc36d-7575-46cf-8843-fbb6610aad77",
 			"key": "UpdatebatchNoOfClasses",
 			"value": ""
 		},
 		{
-			"id": "b5615d1b-a8fc-4f7f-a5bf-8ee56bde9412",
+			"id": "bfe0c91a-77bc-4842-aeb1-686693e49253",
 			"key": "UpdatebatchStatus",
 			"value": ""
 		},
 		{
-			"id": "5cd2b9c0-570f-4cf2-8fe9-e934d4c837b3",
+			"id": "e44fc7e3-695a-4a69-8ce8-8fcb55b4687c",
 			"key": "UpdateprogramId",
 			"value": ""
 		},
 		{
-			"id": "6cda3847-84e7-4d2c-bb8e-d2eac143cc00",
+			"id": "fade1c08-3749-458d-ae78-28447aa1e71c",
 			"key": "programName",
 			"value": ""
 		},
 		{
-			"id": "dd5f862c-0b32-4b77-94aa-b0f39a867c6f",
+			"id": "ee31f888-272a-4486-a70e-b7da9f7d1000",
 			"key": "NewprogramId",
 			"value": ""
 		}
