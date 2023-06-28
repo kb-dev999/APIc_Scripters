@@ -961,9 +961,7 @@
 									"});\r",
 									"\r",
 									"\r",
-									"//Get the newly created program id and set as global variable\r",
-									"\r",
-									"pm.globals.set(\"programId\", pm.response.json().programId);"
+									""
 								],
 								"type": "text/javascript"
 							}
@@ -978,7 +976,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"programDescription\": \"Learn Postman API\",\r\n\"programName\": \"Jun23-APIcScripters-SDET5-DA1-0001\",\r\n \"programId\": 0,\r\n  \"programStatus\": \"Active\",\r\n  \"creationTime\": \"{{$isoTimestamp}}\",\r\n\"lastModTime\": \"{{$isoTimestamp}}\"\r\n}\r\n",
+							"raw": "{\r\n    \"programId\": 0,\r\n  \"programDescription\": \"Learn Postman API\",\r\n\"programName\": \"Jun23-APIcScripters-SDET5-DA1-0001\",\r\n  \"programStatus\": \"Inactive\",\r\n  \"creationTime\": \"{{$isoTimestamp}}\",\r\n\"lastModTime\": \"{{$isoTimestamp}}\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
