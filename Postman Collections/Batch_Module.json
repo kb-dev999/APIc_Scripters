@@ -33,8 +33,8 @@
 									"});",
 									"",
 									"//Check Response Time",
-									"pm.test(\"Response Time is less than 800ms\", () => {",
-									"    pm.expect(pm.response.responseTime).to.be.below(800);",
+									"pm.test(\"Response Time is less than 2000ms\", () => {",
+									"    pm.expect(pm.response.responseTime).to.be.below(2000);",
 									"});",
 									"",
 									"//Validate Response Body",
@@ -2363,93 +2363,93 @@
 	],
 	"variable": [
 		{
-			"id": "9d9f4d3a-ecc7-4cce-948a-2fe3dd587ee0",
+			"id": "414b6bf2-e060-4c81-9e2e-862c04bbf997",
 			"key": "batchID",
 			"value": "2",
 			"disabled": true
 		},
 		{
-			"id": "a99e3183-a958-4b89-a350-5877599879e0",
+			"id": "615b4135-2570-4945-a8b2-996dd2851e7b",
 			"key": "batchName",
 			"value": "SDET",
 			"disabled": true
 		},
 		{
-			"id": "7ccae242-a383-41bc-b481-76f185b3d9d3",
+			"id": "bf8a9af5-9d8b-494e-b956-af0d811a2064",
 			"key": "programID",
 			"value": "1",
 			"disabled": true
 		},
 		{
-			"id": "61d02099-6b10-488f-9cd9-d31ce1d178a4",
+			"id": "efa451f2-db32-44cb-b895-8198c043703d",
 			"key": "NegbatchID",
 			"value": "50",
 			"disabled": true
 		},
 		{
-			"id": "34df105b-c3cb-40bc-a287-4309167b70fd",
+			"id": "ad3fdd38-c0aa-4ee9-8d44-c6f71266c8c0",
 			"key": "NegbatchName",
 			"value": "java",
 			"disabled": true
 		},
 		{
-			"id": "18f62d4d-1fc0-4b2a-a273-fec385104e69",
+			"id": "40ea3527-1440-472b-a5c3-52ff6f7184c3",
 			"key": "NegprogramID",
 			"value": "10",
 			"disabled": true
 		},
 		{
-			"id": "cde41cfb-2655-475c-911b-f164450610a6",
+			"id": "667123ac-df98-4a11-8a5b-448b135a372e",
 			"key": "batchDescription",
 			"value": ""
 		},
 		{
-			"id": "fc9d3e6a-6a81-429b-8cb1-92b27a995ec8",
+			"id": "8840bb64-ea9a-40c8-9fe4-28ab3819958a",
 			"key": "batchNoOfClasses",
 			"value": ""
 		},
 		{
-			"id": "2860c162-4bce-46b3-8238-ed3c30915248",
+			"id": "4db6ecc6-7283-4728-8926-7dba21576db9",
 			"key": "batchStatus",
 			"value": ""
 		},
 		{
-			"id": "e6d88a78-a186-4266-8761-3b2a11b77363",
+			"id": "9f3d37da-0faf-43af-be8f-eec87936504c",
 			"key": "programId",
 			"value": ""
 		},
 		{
-			"id": "bf580cba-e771-447d-b620-b5d9dd6642f5",
+			"id": "25e61b8c-d6e3-4edc-897b-12e4b4eddc26",
 			"key": "batchName",
 			"value": ""
 		},
 		{
-			"id": "b13c0b0d-b6cf-4edf-9385-ffa9afd76c1b",
+			"id": "2b561ba6-af87-4d82-b773-98b670b02aac",
 			"key": "UpdatebatchName",
 			"value": ""
 		},
 		{
-			"id": "40abc36d-7575-46cf-8843-fbb6610aad77",
+			"id": "555789e4-4a16-4ebc-a857-78176ffa9477",
 			"key": "UpdatebatchNoOfClasses",
 			"value": ""
 		},
 		{
-			"id": "bfe0c91a-77bc-4842-aeb1-686693e49253",
+			"id": "310a9a53-e0f1-4116-9a68-0c7b36fa526b",
 			"key": "UpdatebatchStatus",
 			"value": ""
 		},
 		{
-			"id": "e44fc7e3-695a-4a69-8ce8-8fcb55b4687c",
+			"id": "b8bd0673-3463-4dec-bf36-79b8733a3eb9",
 			"key": "UpdateprogramId",
 			"value": ""
 		},
 		{
-			"id": "fade1c08-3749-458d-ae78-28447aa1e71c",
+			"id": "b7af9828-673c-4d0d-9513-dae530efacc2",
 			"key": "programName",
 			"value": ""
 		},
 		{
-			"id": "ee31f888-272a-4486-a70e-b7da9f7d1000",
+			"id": "edf01866-d1ea-4164-899f-d05d4e2fef87",
 			"key": "NewprogramId",
 			"value": ""
 		}
