@@ -847,7 +847,7 @@
 							"variable": [
 								{
 									"key": "programName",
-									"value": "Jun23-APIc Scripters-SDET5DA1-0001"
+									"value": "{{prog_Name}}"
 								}
 							]
 						}
