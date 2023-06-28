@@ -2096,151 +2096,6 @@
 					"response": []
 				},
 				{
-					"name": "update batch program ID Copy",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"id": "6e18a0b3-5c71-4b97-ba58-1251c5cdb3de",
-								"exec": [
-									"//var UpdatebatchName= \"Jun23-APIc Scripters-SDET-SDET{{$randomInt}}-\" + pm.variables.replaceIn(\"{{$randomInt}}\");",
-									"",
-									"//pm.globals.set(\"UpdatebatchName\", UpdatebatchName);",
-									"//pm.collectionVariables.set(\"batchDescription\", \"Testing\" );",
-									"//pm.collectionVariables.set(\"batchNoOfClasses\", \"8\" );",
-									"//pm.collectionVariables.set(\"UpdatebatchStatus\", \"InActive\" );",
-									"pm.collectionVariables.set(\"NewprogramId\", \"4904\");",
-									"//pm.collectionVariables.set(\"programName\", \"Jun23-APIc Scripters-SDET5DA1-388\");",
-									"",
-									"//1362"
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"id": "d1823c64-a709-4eae-8f15-b5864d9fd670",
-								"exec": [
-									"//Verify Status code",
-									"//Status Code Validation",
-									"pm.test(\"Status code is 200\", () => {",
-									"    pm.response.to.have.status(200);",
-									"});",
-									"",
-									"//Check Header is present or not",
-									"pm.test(\"Content-Type Header is present\", () => {",
-									"    pm.response.to.have.header(\"Content-Type\");",
-									"});",
-									"",
-									"//Check Header Value",
-									"pm.test(\"Content-Type Header is application-json\", () => {",
-									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');",
-									"});",
-									"",
-									"//Check Response Time",
-									"pm.test(\"Response Time is less than 500ms\", () => {",
-									"    pm.expect(pm.response.responseTime).to.be.below(500);",
-									"});",
-									"",
-									"//Validate Response Body",
-									"var jsonData=pm.response.json();",
-									"pm.test(\"Test Data Type for response\",() => {",
-									"    pm.expect(jsonData.programName).to.be.a(\"string\");",
-									"    pm.expect(jsonData.batchId).to.be.a(\"number\");",
-									"    pm.expect(jsonData.batchNoOfClasses).to.be.a(\"number\");",
-									"    pm.expect(jsonData.programId).to.be.a(\"number\");",
-									"    pm.expect(jsonData.batchStatus).to.be.a(\"string\");",
-									"    pm.expect(jsonData.batchDescription).to.be.a(\"string\");",
-									"    pm.expect(jsonData.batchName).to.be.a(\"string\");",
-									"});",
-									"",
-									"//API Chaining",
-									"",
-									"var jsonData=pm.response.json();",
-									"var APIbatchId=jsonData.batchId;",
-									"pm.globals.set(\"APIBatchID\", APIbatchId);",
-									"console.log(APIbatchId);",
-									"",
-									"",
-									"//JSON SCHEMA Validation",
-									"var schema = {",
-									"    properties: {",
-									"    programId: {",
-									"      type: \"number\",",
-									"    },",
-									"    programName: {",
-									"      type: \"string\",",
-									"    },",
-									"    programDescription: {",
-									"      type: \"string\",",
-									"    },",
-									"    programStatus: {",
-									"      type: \"string\",",
-									"    },",
-									"     creationTime: {",
-									"      type: \"string\",",
-									"    },",
-									"     lastModTime: {",
-									"      type: \"string\",",
-									"    },",
-									"  },",
-									"  required: [",
-									"    \"batchId\",",
-									"    \"batchName\",",
-									"    \"batchDescription\",",
-									"    \"batchStatus\",",
-									"    \"batchNoOfClasses\",",
-									"    \"programId\",",
-									"    \"programName\"",
-									"  ],",
-									"};",
-									"",
-									"",
-									"pm.test(\"Schema is valid\", () => {",
-									"  pm.response.to.have.jsonSchema(schema);",
-									"});"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"id": "c7244bcb-493d-4085-bff3-fe43d1b13641",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"batchDescription\": \"{{batchDescription}}\",\n  \"batchId\": \"{{APIBatchID}}\",\n  \"batchName\": \"Jun23-APIc Scripters-SDET-SDET794-506\",\n  \"batchNoOfClasses\": \"{{batchNoOfClasses}}\",\n  \"batchStatus\": \"{{batchStatus}}\",\n  \"programId\": \"{{NewprogramId}}\",\n  \"programName\": \"{{programName}}\"\n}\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/batches/:batchId",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"batches",
-								":batchId"
-							],
-							"variable": [
-								{
-									"key": "batchId",
-									"value": "{{UpdateprogramId}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Delete Batch DD",
 					"event": [
 						{
@@ -2536,91 +2391,91 @@
 	],
 	"variable": [
 		{
-			"id": "d68b4d54-6076-43f5-99bc-37f350b4879c",
+			"id": "4449a632-201d-4dca-89b1-58bcf70fd4bd",
 			"key": "batchID",
 			"value": "2",
 			"disabled": true
 		},
 		{
-			"id": "23e9ad49-ee0f-4454-a2c4-2dc8107e52cc",
+			"id": "cfdd8479-02b8-4ed3-9250-93336f5169bc",
 			"key": "batchName",
 			"value": "SDET",
 			"disabled": true
 		},
 		{
-			"id": "8195ca2f-88a4-463f-9687-6b6b5b0dc470",
+			"id": "d2dfc433-6ca3-4486-9ea0-51140895d7c5",
 			"key": "programID",
 			"value": "1",
 			"disabled": true
 		},
 		{
-			"id": "89e2525c-321f-4bf2-b16c-74ab8aaa300d",
+			"id": "45c1632e-def3-4d7f-aeae-9b3f33dadf6e",
 			"key": "NegbatchID",
 			"value": "50",
 			"disabled": true
 		},
 		{
-			"id": "904db421-8b26-4d6c-9dcf-27a639df0335",
+			"id": "37de2e3b-2688-4ab4-a57b-00489f8c9153",
 			"key": "NegbatchName",
 			"value": "java"
 		},
 		{
-			"id": "0ec684b7-3c65-40ff-a92a-49ae01f5fda2",
+			"id": "e6077756-d48b-4c7d-b82e-39091b81d7c2",
 			"key": "NegprogramID",
 			"value": "10"
 		},
 		{
-			"id": "2a25e62f-bd14-4f4e-954a-65bdbe473f66",
+			"id": "1ef93d1e-1f2b-4256-9408-e998c964ecac",
 			"key": "batchDescription",
 			"value": ""
 		},
 		{
-			"id": "a57c905a-6bc7-40eb-9ae9-5aa214e672bc",
+			"id": "396ee429-327b-4b20-a3c8-2656c5963ab3",
 			"key": "batchNoOfClasses",
 			"value": ""
 		},
 		{
-			"id": "d91ff419-3e0b-476c-a070-c5ec86745017",
+			"id": "6cb772f9-3ef5-40e6-a5fc-88ce16d1257d",
 			"key": "batchStatus",
 			"value": ""
 		},
 		{
-			"id": "93af6d7a-6b33-45bb-8b1c-6d92f09a0987",
+			"id": "f831c432-e8b9-416e-afb1-ef3bb4b84d9d",
 			"key": "programId",
 			"value": ""
 		},
 		{
-			"id": "6d7265f1-cbfc-4e07-b28d-38882a512b06",
+			"id": "dc5193fd-9727-41d1-b883-0869958f27fd",
 			"key": "batchName",
 			"value": ""
 		},
 		{
-			"id": "f00a7535-a4a2-4432-bc95-822d9b854de3",
+			"id": "ecf878e5-58bb-4487-a73d-20b5878156c5",
 			"key": "UpdatebatchName",
 			"value": ""
 		},
 		{
-			"id": "bc4e17bd-c7db-40ef-b738-f01a9f496721",
+			"id": "aa7ec909-af8e-4162-896d-b5a67392f526",
 			"key": "UpdatebatchNoOfClasses",
 			"value": ""
 		},
 		{
-			"id": "92402d0d-78b2-4f7a-9016-73ad8f8baf4f",
+			"id": "d2a6cda4-4339-40fb-9c5d-059c3be43470",
 			"key": "UpdatebatchStatus",
 			"value": ""
 		},
 		{
-			"id": "acbda00d-1825-4e8d-8eeb-6296a8b1fe85",
+			"id": "7d1e9ea0-aaf4-4001-8758-ea151e4865eb",
 			"key": "UpdateprogramId",
 			"value": ""
 		},
 		{
-			"id": "1ae67480-1c47-416e-a482-581466822f1a",
+			"id": "1d0d7f59-fe91-4540-92dd-0635fa5f1ea1",
 			"key": "programName",
 			"value": ""
 		},
 		{
-			"id": "084f689c-98e6-49ee-9b4f-c1b361171778",
+			"id": "f89acc87-7518-490a-9aac-690006bf269c",
 			"key": "NewprogramId",
 			"value": ""
 		}
