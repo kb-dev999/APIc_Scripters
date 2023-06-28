@@ -1,0 +1,385 @@
+{
+	"info": {
+		"_postman_id": "798b44df-938a-4cfb-b5a7-41391876b0e7",
+		"name": "DDD- Program",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Data Driven",
+			"item": [
+				{
+					"name": "POST Program (Data Driven Dynamic)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "14642afa-c0ad-47e3-8feb-8bad8dd6d1b9",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "26b26a52-ceb4-477a-af47-9a0e27426e66",
+								"exec": [
+									"//status code validation\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"//Check Response Time\r",
+									"pm.test(\"Response Time is less than 500ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"//Header validation\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"  pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Header Type Validation\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"// Data type validation\r",
+									"\r",
+									"let dateFormat = /([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))/;\r",
+									"\r",
+									"\r",
+									"pm.test(\"All Data types are correct\",()=>{\r",
+									"    var jsondata = pm.response.json();\r",
+									"    pm.expect(jsondata.programId).to.be.a(\"number\");\r",
+									"    pm.expect(jsondata.programName).to.be.a(\"string\");\r",
+									"    pm.expect(jsondata.programDescription).to.be.a(\"string\");\r",
+									"     pm.expect(jsondata.creationTime).to.match(dateFormat);\r",
+									"    pm.expect(jsondata.lastModTime).to.match(dateFormat);\r",
+									"    \r",
+									"});\r",
+									"\r",
+									"//Validating JSON Schema\r",
+									"\r",
+									"var schema = {\r",
+									"    properties: {\r",
+									"    programId: {\r",
+									"      type: \"number\",\r",
+									"    },\r",
+									"    programName: {\r",
+									"      type: \"string\",\r",
+									"    },\r",
+									"    programDescription: {\r",
+									"      type: \"string\",\r",
+									"    },\r",
+									"    programStatus: {\r",
+									"      type: \"string\",\r",
+									"    },\r",
+									"     creationTime: {\r",
+									"      type: \"string\",\r",
+									"    },\r",
+									"     lastModTime: {\r",
+									"      type: \"string\",\r",
+									"    },\r",
+									"  },\r",
+									"  required: [\r",
+									"    \"programId\",\r",
+									"    \"programName\",\r",
+									"    \"programDescription\",\r",
+									"    \"programStatus\",\r",
+									"    \"creationTime\",\r",
+									"    \"lastModTime\"\r",
+									"  ],\r",
+									"};\r",
+									"\r",
+									"\r",
+									"pm.test(\"Schema is valid\", () => {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"//Get the newly created program id and set as global variable\r",
+									"\r",
+									"pm.globals.set(\"programIdDDD\", pm.response.json().programId);\r",
+									"\r",
+									"console.log(pm.response.json());\r",
+									"\r",
+									"\r",
+									"//Confirm program is posted\r",
+									"\r",
+									" pm.test(pm.variables.replaceIn(\" Program {{programIdDDD}} is created using POST\"), () => {\r",
+									"\r",
+									"      pm.response.to.have.status(201);\r",
+									"\r",
+									"    });"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "32a7c139-4578-4ef9-b6ea-e23ee839f68b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"programDescription\": \"{{program_DescDDD}}\",\r\n\"programName\": \"{{program_NameDDDD}}\",\r\n  \"programStatus\": \"{{programStatusDDD}}\",\r\n \"creationTime\":\"{{$isoTimestamp}}\",\r\n\"lastModTime\": \"{{$isoTimestamp}}\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/saveprogram"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT program by ID DDD",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d5013852-9d84-4158-b1b2-0e83d6d0ad97",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "0d152bc4-7cc9-4892-ae9c-fb1a55de975c",
+								"exec": [
+									"//status code validation\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Check Response Time\r",
+									"pm.test(\"Response Time is less than 500ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"//Header validation\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"  pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Header Type Validation\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"  pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"// Data type validation\r",
+									"\r",
+									"let dateFormat = /([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))/;\r",
+									"\r",
+									"\r",
+									"pm.test(\"All Data types are correct\",()=>{\r",
+									"    var jsondata = pm.response.json();\r",
+									"    pm.expect(jsondata.programId).to.be.a(\"number\");\r",
+									"    pm.expect(jsondata.programName).to.be.a(\"string\");\r",
+									"    pm.expect(jsondata.programDescription).to.be.a(\"string\");\r",
+									"     pm.expect(jsondata.creationTime).to.match(dateFormat);\r",
+									"    pm.expect(jsondata.lastModTime).to.match(dateFormat);\r",
+									"    \r",
+									"});\r",
+									"\r",
+									"//Validate Response body content\r",
+									"\r",
+									"\r",
+									"pm.test(\"Newly created Program matches request attributes\",() => {\r",
+									"   var jsonData = pm.response.json(); \r",
+									"   pm.expect(jsonData).to.haveOwnProperty(\"programId\");\r",
+									"   pm.expect(jsonData.programName).to.include(\"Jun23-APIcScripters-SDET5-DA1-0001\");\r",
+									"   pm.expect(jsonData.programDescription).to.include(\"Learn Postman API\");\r",
+									"   pm.expect(jsonData.programStatus).to.include(\"Active\");\r",
+									"   \r",
+									"});\r",
+									"\r",
+									"//Validating JSON Schema\r",
+									"\r",
+									"var schema = {\r",
+									"    properties: {\r",
+									"    programId: {\r",
+									"      type: \"number\",\r",
+									"    },\r",
+									"    programName: {\r",
+									"      type: \"string\",\r",
+									"    },\r",
+									"    programDescription: {\r",
+									"      type: \"string\",\r",
+									"    },\r",
+									"    programStatus: {\r",
+									"      type: \"string\",\r",
+									"    },\r",
+									"     creationTime: {\r",
+									"      type: \"string\",\r",
+									"    },\r",
+									"     lastModTime: {\r",
+									"      type: \"string\",\r",
+									"    },\r",
+									"  },\r",
+									"  required: [\r",
+									"    \"programId\",\r",
+									"    \"programName\",\r",
+									"    \"programDescription\",\r",
+									"    \"programStatus\",\r",
+									"    \"creationTime\",\r",
+									"    \"lastModTime\"\r",
+									"  ],\r",
+									"};\r",
+									"\r",
+									"//schema validatiom\r",
+									"\r",
+									"pm.test(\"Schema is valid\", () => {\r",
+									"  pm.response.to.have.jsonSchema(schema);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Get the newly created program id and set as global variable\r",
+									"\r",
+									"pm.globals.set(\"programIdDDD\", pm.response.json().programId);\r",
+									"\r",
+									"console.log(pm.response.json());\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "f7c28f0c-27c0-4920-91d9-85743b62b837",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"programDescription\": \"Learn Postman API\",\r\n\"programName\": \"Jun23-APIcScripters-SDET5-DA1-0001\",\r\n \"programId\": 212121212,\r\n  \"programStatus\": \"Active\",\r\n  \"creationTime\": \"{{$isoTimestamp}}\",\r\n\"lastModTime\": \"{{$isoTimestamp}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/putprogram/:programId",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"putprogram",
+								":programId"
+							],
+							"variable": [
+								{
+									"key": "programId",
+									"value": "{{programIdDDD}}",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE program by Id DDD",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "d5013852-9d84-4158-b1b2-0e83d6d0ad97",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "8ae131f1-87f5-4be5-96bf-af5037a4a8d5",
+								"exec": [
+									"//status code validation & Message & Boolean success validation - Initial response is text so code modified to text format\r",
+									"\r",
+									"const respbody = pm.response.text();\r",
+									"\r",
+									"pm.test(pm.variables.replaceIn(\"200 : ok  with Message (Eg: Message: Program Id-{{programIdDDD}} is deleted Successfully!)\"), () =>{\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.expect(respbody).to.include('Program Id-');\r",
+									"    pm.expect(respbody).to.include(' is deleted Successfully!');\r",
+									"    pm.expect(respbody).to.include(pm.variables.get(\"programIdDDD\"));\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Check Response Time\r",
+									"pm.test(\"Response Time is less than 500ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "8e36064f-03d3-4f69-90a0-dda30c480001",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/deletebyprogid/:programid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"deletebyprogid",
+								":programid"
+							],
+							"variable": [
+								{
+									"key": "programid",
+									"value": "{{programIdDDD}}",
+									"type": "string"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "05c3da5a-ba17-4f06-99b7-1e837119b6d0"
+		}
+	]
+}
