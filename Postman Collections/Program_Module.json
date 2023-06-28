@@ -124,7 +124,7 @@
 									"\r",
 									"pm.globals.set(\"programId\", pm.response.json().programId);\r",
 									"\r",
-									"//Confirm program is posted\r",
+									"//Show confirmation message for posted program\r",
 									"\r",
 									" pm.test(pm.variables.replaceIn(\" Program ID {{programId}} is created using POST\"), () => {\r",
 									"\r",
