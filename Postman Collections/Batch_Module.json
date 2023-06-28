@@ -1547,43 +1547,6 @@
 					"response": []
 				},
 				{
-					"name": "Neg Update Batch existing name",
-					"id": "38da9d8a-5696-4d96-a208-efbc8c014326",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"batchDescription\": \"{{batchDescription}}\",\n  \"batchId\": \"{{APIBatchID}}\",\n  \"batchName\": \"Jun23-APIc Scripters-SDET-SDET903-219\",\n  \"batchNoOfClasses\": \"{{batchNoOfClasses}}\",\n  \"batchStatus\": \"{{batchStatus}}\",\n  \"programId\": \"{{programId}}\",\n  \"programName\": \"{{programName}}\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{baseurl}}/batches/:batchId",
-							"host": [
-								"{{baseurl}}"
-							],
-							"path": [
-								"batches",
-								":batchId"
-							],
-							"variable": [
-								{
-									"key": "batchId",
-									"value": "{{APIBatchID}}"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Neg Update Batch invaliad batch name",
 					"event": [
 						{
@@ -2428,91 +2391,91 @@
 	],
 	"variable": [
 		{
-			"id": "b67767c9-4919-4c22-b7a0-9664ababa915",
+			"id": "f73f0540-5463-485a-9745-cb0e072f9f51",
 			"key": "batchID",
 			"value": "2",
 			"disabled": true
 		},
 		{
-			"id": "0cd52871-67ae-4502-8353-b36ccca2608a",
+			"id": "9f1d2c4f-6df3-4999-9e37-d8cf33f780f8",
 			"key": "batchName",
 			"value": "SDET",
 			"disabled": true
 		},
 		{
-			"id": "4cdf044f-da85-4c51-abcd-be92c9a215ed",
+			"id": "aaf5c897-b857-43ec-88e9-48edf0880dc2",
 			"key": "programID",
 			"value": "1",
 			"disabled": true
 		},
 		{
-			"id": "5a9f47b9-d133-48ef-948c-6669dcbb326b",
+			"id": "c6d0e6c0-2c76-4b57-bc0f-9d47947519b4",
 			"key": "NegbatchID",
 			"value": "50",
 			"disabled": true
 		},
 		{
-			"id": "ddbf555d-68c9-4d4d-a1da-43d8e81aea51",
+			"id": "58115ced-9716-416a-895d-efae1c8760aa",
 			"key": "NegbatchName",
 			"value": "java"
 		},
 		{
-			"id": "96c91231-c888-4ce3-8b7f-4fb30681f0fa",
+			"id": "4615e704-1bb6-44cb-8d32-73940e153326",
 			"key": "NegprogramID",
 			"value": "10"
 		},
 		{
-			"id": "87ca73bd-4ec8-4fd4-b588-a6f616c24c6b",
+			"id": "cc219363-b85e-41ab-8a17-4379820f27e2",
 			"key": "batchDescription",
 			"value": ""
 		},
 		{
-			"id": "75256b84-811f-455e-abcf-8925c52434af",
+			"id": "a84c2d37-19ad-4e45-a865-ebedd6e3a3b8",
 			"key": "batchNoOfClasses",
 			"value": ""
 		},
 		{
-			"id": "e0d9191c-bc9d-4e20-b351-e2e832202fe8",
+			"id": "ba20a690-7ca9-4f67-a06b-dc8538eb430e",
 			"key": "batchStatus",
 			"value": ""
 		},
 		{
-			"id": "1ed99762-2d20-40fe-9ef6-f07a1b5337d8",
+			"id": "192b6884-2229-48c3-9869-9b963165e544",
 			"key": "programId",
 			"value": ""
 		},
 		{
-			"id": "2678b489-2e46-4d51-af2e-f17014674dd4",
+			"id": "b073bdba-2b48-4cab-a325-05d6edcf571e",
 			"key": "batchName",
 			"value": ""
 		},
 		{
-			"id": "ca623f70-8a8b-4321-a911-991c773b6f43",
+			"id": "f6f2968a-081d-4639-981c-76e544771bb5",
 			"key": "UpdatebatchName",
 			"value": ""
 		},
 		{
-			"id": "06bb7986-b099-43b7-a383-5166f84e46f3",
+			"id": "1b22fa91-17fd-4e46-b395-a0e7a3fc1c40",
 			"key": "UpdatebatchNoOfClasses",
 			"value": ""
 		},
 		{
-			"id": "6559bd93-32c6-44ae-8675-857b3f165626",
+			"id": "ebb137d6-caf6-473d-b159-f9f8bcfd44b4",
 			"key": "UpdatebatchStatus",
 			"value": ""
 		},
 		{
-			"id": "1d5dd284-df58-4b70-9e76-c1ec20d757db",
+			"id": "e2a3dfbb-9cc9-456e-8b20-8cbcc6eff205",
 			"key": "UpdateprogramId",
 			"value": ""
 		},
 		{
-			"id": "726e3e76-ab2d-4168-ade8-217d685ccc24",
+			"id": "a2b50a30-fc6f-4f10-b3a0-c1c2286655e4",
 			"key": "programName",
 			"value": ""
 		},
 		{
-			"id": "69fa2ef9-52c6-45e6-9c78-500f90dc13ef",
+			"id": "4ee1d5d8-63c6-4f09-ac9a-abb52cd034c5",
 			"key": "NewprogramId",
 			"value": ""
 		}
