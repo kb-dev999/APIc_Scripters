@@ -491,7 +491,7 @@
 									"  if (!item.programName) {\r",
 									"    return\r",
 									"  }\r",
-									"  return item.programName.includes(\"Jun23-APIc\");\r",
+									"  return item.programName.includes(\"APIc\");\r",
 									"});\r",
 									"console.log(\"filteredData\", filteredData);"
 								],
