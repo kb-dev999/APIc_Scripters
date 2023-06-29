@@ -757,12 +757,12 @@
 									"\r",
 									"\r",
 									"if(currSelectedRole === 'R01'){\r",
-									"    pm.environment.set(\"current_roleName\", \"ROLE_ADMIN\");\r",
+									"    pm.environment.set(\"roleName\", \"ROLE_ADMIN\");\r",
 									"}\r",
 									"else if(currSelectedRole === 'R02'){\r",
-									"    pm.environment.set(\"current_roleName\", \"ROLE_STAFF\");\r",
+									"    pm.environment.set(\"roleName\", \"ROLE_STAFF\");\r",
 									"}else{\r",
-									"    pm.environment.set(\"current_roleName\", \"ROLE_STUDENT\");\r",
+									"    pm.environment.set(\"roleName\", \"ROLE_STUDENT\");\r",
 									"}\r",
 									"\r",
 									"//Role_Name \r",
@@ -2292,46 +2292,46 @@
 	],
 	"variable": [
 		{
-			"id": "b10f9f6c-1bd2-41d2-9909-91054a82ab3c",
+			"id": "db34fe09-e692-4a23-9348-c8fbddc65d1c",
 			"key": "BaseURL",
 			"value": "lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com",
 			"type": "string",
 			"disabled": true
 		},
 		{
-			"id": "55168079-4689-45be-b3a2-d2a594946fe3",
+			"id": "9f75e6fc-ea41-4799-b751-a64d3fee9b4d",
 			"key": "ROLE_ID_R01",
 			"value": "",
 			"disabled": true
 		},
 		{
-			"id": "14e011b6-5a5f-46b6-9cbc-4e5a18ff8bd4",
+			"id": "a4967792-5f46-4261-a81c-18ee631aa000",
 			"key": "ROLE_ID_R01",
 			"value": ""
 		},
 		{
-			"id": "a9195ec2-cd8f-403d-89c6-9957eb7228fc",
+			"id": "2a84a364-543a-4dd8-94b2-29dd12bd14df",
 			"key": "UserId",
 			"value": "U4525"
 		},
 		{
-			"id": "e06a4132-19a1-4df7-8af4-fae8fb33f028",
+			"id": "c293dec2-e2ab-4ba4-9c06-e64ac0347a65",
 			"key": "newTZ",
 			"value": "MST",
 			"type": "string"
 		},
 		{
-			"id": "61cade79-7762-402b-adbf-a462a0f8b738",
+			"id": "5ce959f5-4689-4a88-9f80-2c71383b49d6",
 			"key": "UserId1",
 			"value": "Sid"
 		},
 		{
-			"id": "165db17e-4593-4fc8-a145-b29db4524563",
+			"id": "531729cb-6a02-4a2d-8231-f3f5dae70c28",
 			"key": "userId1",
 			"value": ""
 		},
 		{
-			"id": "183e64b2-6d33-4333-850c-b0cc71054ded",
+			"id": "527821da-9f03-4c80-9b73-053027b33257",
 			"key": "euid",
 			"value": "Sid"
 		}
