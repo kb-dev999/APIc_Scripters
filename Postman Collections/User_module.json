@@ -701,6 +701,149 @@
 						"url": "{{baseurl}}/users/users/roleStatus"
 					},
 					"response": []
+				},
+				{
+					"name": "MultipleRuns with same set of data Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "b5bd07c0-0dc6-42ba-bd93-d6af46035539",
+								"exec": [
+									"\r",
+									"//User Role\r",
+									"pm.collectionVariables.set(\"ROLE_ID_R01\", \"R01\");\r",
+									"\r",
+									"//Random Number\r",
+									"\r",
+									"const phNo = _.random(1000000000,9999999999)\r",
+									"pm.environment.set(\"phnNum\",phNo);\r",
+									"\r",
+									"const timeZn_1= \"EST\";\r",
+									"pm.environment.set(\"Tz1\",timeZn_1);\r",
+									"\r",
+									"const timeZn_2= \"CST\";\r",
+									"pm.environment.set(\"Tz2\",timeZn_2);\r",
+									"\r",
+									"const timeZn_3= \"MST\";\r",
+									"pm.environment.set(\"Tz3\",timeZn_3);\r",
+									"\r",
+									"const timeZn_4= \"PST\";\r",
+									"pm.environment.set(\"Tz4\",timeZn_4);\r",
+									"\r",
+									"const timeZn_5= \"IST\";\r",
+									"pm.environment.set(\"Tz5\",timeZn_5);\r",
+									"\r",
+									"//Random First Name\r",
+									"var rnFName=pm.variables.replaceIn('{{$randomFirstName}}');\r",
+									"pm.environment.set(\"fName\",rnFName);\r",
+									"\r",
+									"var rnLName=pm.variables.replaceIn('{{$randomLastName}}');\r",
+									"pm.environment.set(\"LName\",rnLName);\r",
+									"\r",
+									"\r",
+									"//Role_Id_multipleIteration\r",
+									"var arrRoles = pm.environment.get(\"arrRoles\");\r",
+									"\r",
+									"if(!arrRoles){\r",
+									"  arrRoles = [\"R01\",\"R02\",\"R03\"];\r",
+									"}\r",
+									"\r",
+									"var currSelectedRole = arrRoles.shift();\r",
+									"console.log(\"array now is \",arrRoles);\r",
+									"console.log(\"currSelectedRole now is \",currSelectedRole);\r",
+									"pm.environment.set(\"roleid_\",currSelectedRole);\r",
+									"pm.environment.set(\"arrRoles\",arrRoles);\r",
+									"\r",
+									"\r",
+									"if(currSelectedRole === 'R01'){\r",
+									"    pm.environment.set(\"roleName\", \"ROLE_ADMIN\");\r",
+									"}\r",
+									"else if(currSelectedRole === 'R02'){\r",
+									"    pm.environment.set(\"roleName\", \"ROLE_STAFF\");\r",
+									"}\r",
+									"\r",
+									"//Role_Name \r",
+									"\r",
+									"var roleName = pm.environment.get(\"roleName\");\r",
+									"if(!roleName){\r",
+									"    roleName=[\"ROLE_ADMIN\", \"ROLE_STAFF\",\"ROLE_STUDENT\"];\r",
+									"}\r",
+									"var current_roleName= roleName.shift();\r",
+									"console.log(\"array now is\",roleName);\r",
+									"console.log(\"currSelectedRoleName now is \", current_roleName);\r",
+									"pm.environment.set(\"current_roleName\", current_roleName);\r",
+									"pm.environment.set(\"roleName\", roleName);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "d30530fb-e0b4-4559-b688-1aeaac49fea8",
+								"exec": [
+									"var arrRoles = pm.environment.get(\"arrRoles\");\r",
+									"\r",
+									"if(arrRoles && arrRoles.length > 0){\r",
+									"    postman.setNextRequest(\"https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/users/users/roleStatus\");\r",
+									"\r",
+									"}else{\r",
+									"    postman.setNextRequest(null);\r",
+									"    pm.environment.unset(\"arrRoles\");\r",
+									"}\r",
+									"\r",
+									"var roleName = pm.environment.get(\"roleName\");\r",
+									"\r",
+									"if(roleName && roleName.length > 0){\r",
+									"    postman.setNextRequest(\"https://lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com/lms/users/users/roleStatus\");\r",
+									"\r",
+									"}else{\r",
+									"    postman.setNextRequest(null);\r",
+									"    pm.environment.unset(\"roleName\");\r",
+									"}\r",
+									"\r",
+									"\r",
+									"//For chaining\r",
+									"\r",
+									"// var jsonResponse=pm.response.json();\r",
+									"// var newUserId=jsonResponse.userId;\r",
+									"\r",
+									"// pm.globals.set(\"UId\", newUserId);\r",
+									"\r",
+									"\r",
+									"// console.log(\"The created User Id is \"+ newUserId);\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"id": "d538f9f6-1e46-4ab3-8190-42134821f835",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\"userFirstName\":\"{{fName}}\",\r\n\"userLastName\":\"{{LName}}\",\r\n\"userPhoneNumber\":\"{{phnNum}}\",\r\n\"userRoleMaps\": [\r\n{\r\n\"roleId\":\"{{roleid_}}\",\r\n\"userRoleStatus\":\"{{current_roleName}}\"\r\n}\r\n],\r\n\"userTimeZone\":\"{{Tz5}}\",\r\n\"userVisaStatus\":\"H4-EAD\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/users/users/roleStatus"
+					},
+					"response": []
 				}
 			],
 			"id": "c340a966-1be6-4d7a-984f-d11f8b69b7bf"
@@ -2147,46 +2290,46 @@
 	],
 	"variable": [
 		{
-			"id": "8b348f93-d549-438d-b16a-377d67cbb86f",
+			"id": "0268624d-d5b0-47d2-9faa-d27bfbaa5ce7",
 			"key": "BaseURL",
 			"value": "lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com",
 			"type": "string",
 			"disabled": true
 		},
 		{
-			"id": "6f8c80b4-f448-4466-8322-cc754a900fb6",
+			"id": "1788d87d-04ca-49bb-8d05-e12d6f59fc15",
 			"key": "ROLE_ID_R01",
 			"value": "",
 			"disabled": true
 		},
 		{
-			"id": "5be75787-bbc0-4ffd-ba6b-48941ae3af7e",
+			"id": "87f35d43-438d-4648-b70d-685b7c9549bf",
 			"key": "ROLE_ID_R01",
 			"value": ""
 		},
 		{
-			"id": "3bd0d104-bafa-4f17-9280-7fa022cc12e1",
+			"id": "ee105beb-98e9-4d01-ad0c-ddb269ee4f02",
 			"key": "UserId",
 			"value": "U4525"
 		},
 		{
-			"id": "9aff1454-8f69-48bf-b00b-c95bb047bc1c",
+			"id": "25bfe02b-3c52-4a92-b18f-83bc62bd6d30",
 			"key": "newTZ",
 			"value": "MST",
 			"type": "string"
 		},
 		{
-			"id": "3bdfb775-d8b2-43e2-9dfa-222567c61576",
+			"id": "d4a0b1e4-3299-4383-bcf8-ee0801e7a409",
 			"key": "UserId1",
 			"value": "Sid"
 		},
 		{
-			"id": "237cf5e1-2b72-4a34-86d0-29c7362ae806",
+			"id": "132f5b24-d066-4c30-9b72-a635f2a6e66a",
 			"key": "userId1",
 			"value": ""
 		},
 		{
-			"id": "6c162da3-3541-4622-ba62-be460bc52843",
+			"id": "51651f90-007a-4880-923b-20a5733ee30d",
 			"key": "euid",
 			"value": "Sid"
 		}
