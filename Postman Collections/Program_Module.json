@@ -327,14 +327,15 @@
 					],
 					"id": "12f8014f-8cee-47ed-bf39-69a051d557df",
 					"protocolProfileBehavior": {
-						"disableBodyPruning": true
+						"disableBodyPruning": true,
+						"disableUrlEncoding": true
 					},
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"programDescription\": \"SDET\",\r\n\"programName\": \"{{programName}}\",\r\n  \"programStatus\": \"Active\"\r\n}\r\n//run twice if it does not work once",
+							"raw": "{\r\n  \"programDescription\": \"SDET\",\r\n\"programName\": \"{{programName}}\",\r\n  \"programStatus\": \"Active\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
