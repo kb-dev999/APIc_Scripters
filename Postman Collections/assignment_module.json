@@ -742,33 +742,9 @@
 					"name": "Negative create with Existing Assignment name",
 					"event": [
 						{
-							"listen": "prerequest",
-							"script": {
-								"id": "8309ce89-e733-4c57-ada8-7f612f7b1555",
-								"exec": [
-									"//var assignmentName= \"Jun23-APIc Scripters-SDET-SQL-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
-									"pm.collectionVariables.set(\"assignmentDescription\", \"Selenium with Java\");\r",
-									"pm.collectionVariables.set( \"assignmentId\",1368);\r",
-									"//pm.globals.set(\"assignmentName\", assignmentName);\r",
-									"pm.collectionVariables.set(\"batchId\", \"220\" );\r",
-									"pm.collectionVariables.set(\"comments\",\"null\");\r",
-									"pm.collectionVariables.set(\"createdBy\", \"U2401\" );\r",
-									"pm.collectionVariables.set(\"dueDate\",\"2023-06-30T22:02:28.140+00:00\",);\r",
-									"pm.collectionVariables.set(\"graderId\", \"U2401\");\r",
-									"pm.collectionVariables.set(\"pathAttachment1\",\"Attachment1\");\r",
-									"pm.collectionVariables.set(\"pathAttachment2\",\"Attachment2\");\r",
-									"pm.collectionVariables.set(\"pathAttachment3\",\"Attachment3\");\r",
-									"pm.collectionVariables.set(\"pathAttachment4\",\"Attachment4\");\r",
-									"pm.collectionVariables.set(\"pathAttachment5\",\"Attachment5\");\r",
-									""
-								],
-								"type": "text/javascript"
-							}
-						},
-						{
 							"listen": "test",
 							"script": {
-								"id": "1040f9d7-efcb-43bb-ba9b-2d03acccf282",
+								"id": "131188c1-91b1-40fe-b234-bb28671f0ace",
 								"exec": [
 									"//status code validation\r",
 									"pm.test(\"Status code is 400\", function () {\r",
@@ -796,7 +772,32 @@
 									"    pm.expect(jsondata).to.have.property('message');\r",
 									"    pm.expect(jsondata.message).to.include('Assignment Name is mandatory');\r",
 									"});\r",
+									"postman.setNextRequest(\"Negative assignemnt for invalid create by\");\r",
 									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "2449d78e-2066-4b7b-8c58-83ca662e748e",
+								"exec": [
+									"//var assignmentName= \"Jun23-APIc Scripters-SDET-SQL-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+									"pm.collectionVariables.set(\"assignmentDescription\", \"Selenium with Java\");\r",
+									"pm.collectionVariables.set( \"assignmentId\",1368);\r",
+									"//pm.globals.set(\"assignmentName\", assignmentName);\r",
+									"pm.collectionVariables.set(\"batchId\", \"220\" );\r",
+									"pm.collectionVariables.set(\"comments\",\"null\");\r",
+									"pm.collectionVariables.set(\"createdBy\", \"U2401\" );\r",
+									"pm.collectionVariables.set(\"dueDate\",\"2023-06-30T22:02:28.140+00:00\",);\r",
+									"pm.collectionVariables.set(\"graderId\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"pathAttachment1\",\"Attachment1\");\r",
+									"pm.collectionVariables.set(\"pathAttachment2\",\"Attachment2\");\r",
+									"pm.collectionVariables.set(\"pathAttachment3\",\"Attachment3\");\r",
+									"pm.collectionVariables.set(\"pathAttachment4\",\"Attachment4\");\r",
+									"pm.collectionVariables.set(\"pathAttachment5\",\"Attachment5\");\r",
 									""
 								],
 								"type": "text/javascript"
@@ -819,7 +820,7 @@
 								}
 							}
 						},
-						"url": "{{baseurl}}/assignments/batch/{{batch_ID}}"
+						"url": "{{baseurl}}/assignments"
 					},
 					"response": []
 				},
@@ -2880,152 +2881,152 @@
 	],
 	"variable": [
 		{
-			"id": "81678f7f-e029-474a-a56b-5c9d72031c71",
+			"id": "76bc1077-ef0c-4f45-9651-6b21497cb388",
 			"key": "assigmentID",
 			"value": "1201"
 		},
 		{
-			"id": "40546032-c2d5-4067-b7bc-1fed77ff5575",
+			"id": "6a9f71bd-cda3-4046-9b04-fbede493bcc4",
 			"key": "NegassigmentID",
 			"value": "1"
 		},
 		{
-			"id": "3fa9a7f5-f1f4-4505-b4c5-e40ebb3d60ac",
+			"id": "652e0dff-1a26-4ba9-b2b7-f4533677c76a",
 			"key": "batchID",
 			"value": "2"
 		},
 		{
-			"id": "6aab785e-ffd9-40dc-a3e7-fb4956b1e67c",
+			"id": "5e3dbe82-5004-4b0a-ada0-8aaaecb01ed1",
 			"key": "NegbatchID",
 			"value": "15"
 		},
 		{
-			"id": "693ff9bc-59fc-4103-b167-e56a298c82e3",
+			"id": "3e00f095-b85e-41ce-b592-18063a277612",
 			"key": "assignmentDescription",
 			"value": ""
 		},
 		{
-			"id": "a805733c-1b71-4342-bf5a-a5274977cea9",
+			"id": "1dbc3980-ed2c-4021-aea2-055ec183d811",
 			"key": "assignmentId",
 			"value": ""
 		},
 		{
-			"id": "4544c715-ffef-44ad-a1a3-36bf4c975400",
+			"id": "f2f32af8-7126-45dc-ba0b-009362cde4bb",
 			"key": "batchId",
 			"value": ""
 		},
 		{
-			"id": "e0488e44-81a3-4f67-9806-07ba721e5ae0",
+			"id": "b38330d2-190c-4caa-a92a-9a7f0af10efb",
 			"key": "comments",
 			"value": ""
 		},
 		{
-			"id": "6f669ebf-76ab-4472-bf92-3c4338e70ffa",
+			"id": "f355b9e0-09c1-4e29-8f7b-1752c5a04e04",
 			"key": "createdBy",
 			"value": ""
 		},
 		{
-			"id": "f7ed7bcd-62d6-43b5-b85b-a83d20e08627",
+			"id": "9856c509-bc09-4e07-9f20-e845d8f84ffb",
 			"key": "dueDate",
 			"value": ""
 		},
 		{
-			"id": "3117692e-1a50-49d4-b87c-972feb4185b3",
+			"id": "fe28c058-31bd-4773-a3cd-afefb1e5199c",
 			"key": "graderId",
 			"value": ""
 		},
 		{
-			"id": "1d966477-fffa-43c7-814e-7e1868556dd5",
+			"id": "afb6164d-557a-436f-a50e-4ecd9ef8ab46",
 			"key": "pathAttachment1",
 			"value": ""
 		},
 		{
-			"id": "349a9d60-b528-4f2d-90b7-847b4e5a8611",
+			"id": "5eb9dbbb-deca-4a81-895e-50a3bee331e2",
 			"key": "pathAttachment2",
 			"value": ""
 		},
 		{
-			"id": "f92f4b08-cf33-476b-8fc1-a1468cfd8fd0",
+			"id": "3060c96e-471d-4073-845b-631bb9eeab7b",
 			"key": "pathAttachment3",
 			"value": ""
 		},
 		{
-			"id": "abfe0e70-9391-470b-b47c-cef31f7f6af1",
+			"id": "261e4c0e-8df2-48b1-ad79-740224caf897",
 			"key": "pathAttachment4",
 			"value": ""
 		},
 		{
-			"id": "17b5067a-443c-4547-b526-70bd4bd6a65c",
+			"id": "72590c44-3461-4ac8-9a86-9a534289fb1a",
 			"key": "pathAttachment5",
 			"value": ""
 		},
 		{
-			"id": "024bed4d-d6eb-421d-bb63-d02d4fd1f940",
+			"id": "38ebbf21-dd61-4a8f-8324-10ceb23bd5e7",
 			"key": "UpdatedassignmentDescription",
 			"value": ""
 		},
 		{
-			"id": "41709c62-2bd5-479e-a145-953200e93130",
+			"id": "833bf173-aaea-45f1-8aa5-88518dca7020",
 			"key": "UpdatedbatchId",
 			"value": ""
 		},
 		{
-			"id": "b65491f4-f797-4706-b93c-d4e7e177574a",
+			"id": "ad9efc9d-e297-46da-9a56-9a4eb7e1b78b",
 			"key": "Updatedcomments",
 			"value": ""
 		},
 		{
-			"id": "f74ff37d-c13d-4bcb-a67e-7b8add3b408a",
+			"id": "b293ff1e-ed8e-4ac7-b31c-00016ef687de",
 			"key": "UpdatedcreatedBy",
 			"value": ""
 		},
 		{
-			"id": "4c515559-0d37-4b54-b5a1-0aef411b10dc",
+			"id": "e5fc1e60-b58a-4ce0-9a8d-390cfad82745",
 			"key": "UpdateddueDate",
 			"value": ""
 		},
 		{
-			"id": "a2a9323c-acf9-4eff-86ff-abce155bbfb5",
+			"id": "59e1c187-b226-44ae-86c0-8b323701be28",
 			"key": "UpdatedgraderId",
 			"value": ""
 		},
 		{
-			"id": "90aee32c-d911-43c7-b1c5-ba0684c4f845",
+			"id": "5cba9442-6a47-4d3a-8149-652f4bbd34fc",
 			"key": "UpdatedpathAttachment1",
 			"value": ""
 		},
 		{
-			"id": "d410082e-7b60-48c1-b9ba-2dd0b0cb8b4a",
+			"id": "98f9b414-c875-4b06-a504-d3bc50ae6253",
 			"key": "UpdatedpathAttachment2",
 			"value": ""
 		},
 		{
-			"id": "98b67132-ac11-4097-b888-9e3623055ee2",
+			"id": "a8fcf30b-2f8f-4706-872b-501a176a1de9",
 			"key": "UpdatedpathAttachment3",
 			"value": ""
 		},
 		{
-			"id": "514d7d0e-ffea-4650-96fe-098e4b0fe4fe",
+			"id": "18479188-e149-4377-b585-96dda638502b",
 			"key": "UpdatedpathAttachment4",
 			"value": ""
 		},
 		{
-			"id": "f0afdc13-f8b5-4e97-a170-80c84e2d2093",
+			"id": "688e85ec-1b7b-4686-a2ac-20f3725816b8",
 			"key": "UpdatedpathAttachment5",
 			"value": ""
 		},
 		{
-			"id": "c245cadf-923a-4136-ab4a-26a6ccef22e2",
+			"id": "e6ae3289-1f13-419a-8ef8-403b5b6c0ae0",
 			"key": "Neg_Assign_mentID",
 			"value": "124"
 		},
 		{
-			"id": "fdd883ae-45c0-477f-9802-046f6bbe9fea",
+			"id": "e7a68af8-82c2-4435-b292-8370c8895a3c",
 			"key": "batch_ID",
 			"value": "3692"
 		},
 		{
-			"id": "2ae972d8-852c-4b35-ba6b-e356d3aeea4a",
+			"id": "3e5d34b8-289d-4a10-9c5e-b28d54721814",
 			"key": "ssignmentDescription",
 			"value": ""
 		}
