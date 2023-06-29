@@ -277,7 +277,8 @@
 					],
 					"id": "cdf205fe-cc62-40d7-ae56-535821dcf31e",
 					"protocolProfileBehavior": {
-						"disableBodyPruning": true
+						"disableBodyPruning": true,
+						"disableUrlEncoding": true
 					},
 					"request": {
 						"method": "POST",
@@ -326,7 +327,8 @@
 					],
 					"id": "12f8014f-8cee-47ed-bf39-69a051d557df",
 					"protocolProfileBehavior": {
-						"disableBodyPruning": true
+						"disableBodyPruning": true,
+						"disableUrlEncoding": true
 					},
 					"request": {
 						"method": "POST",
