@@ -1,0 +1,3466 @@
+{
+	"info": {
+		"_postman_id": "7b402d9f-17e5-449f-b264-8387583729ee",
+		"name": "Assignment",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "GET All Assignment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "43beaeb1-c69f-4edc-ae51-f6234fdaf1eb",
+								"exec": [
+									"//Status Code Validation\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"//Validate Response Body data type\r",
+									" var responsejsondata=pm.response.json();\r",
+									"\r",
+									"pm.test(\"Test Data Type for response\",() => {\r",
+									"   \r",
+									"    console.log(\"assigment id\");\r",
+									"    console.log(responsejsondata.assignmentId);\r",
+									"    pm.expect(responsejsondata[0].assignmentId).to.be.a(\"number\"); \r",
+									"    pm.expect(responsejsondata[0].assignmentName).to.be.a(\"string\");\r",
+									"    pm.expect(responsejsondata[0].assignmentDescription).to.be.a(\"string\");\r",
+									"    pm.expect(responsejsondata[0].comments).to.be.a(\"null\");\r",
+									"    pm.expect(responsejsondata[0].pathAttachment1).to.be.a(\"string\");\r",
+									"    pm.expect(responsejsondata[0].pathAttachment2).to.be.a(\"string\");\r",
+									"    pm.expect(responsejsondata[0].pathAttachment3).to.be.a(\"string\");\r",
+									"    pm.expect(responsejsondata[0].pathAttachment4).to.be.a(\"string\");\r",
+									"    pm.expect(responsejsondata[0].pathAttachment5).to.be.a(\"string\");\r",
+									"    pm.expect(responsejsondata[0].batchId).to.be.a(\"number\");\r",
+									"    pm.expect(responsejsondata[0].createdBy).to.be.a(\"string\");\r",
+									"    pm.expect(responsejsondata[0].graderId).to.be.a(\"string\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//JSON Schema validation\r",
+									"var jsondata=pm.response.json();\r",
+									"  var schema = {\r",
+									"      \r",
+									"  //\"type\": \"array\",\r",
+									" \"items\": [\r",
+									"    {\r",
+									"    \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"assignmentDescription\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"assignmentId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"assignmentName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"batchId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"comments\": {\r",
+									"          \"type\": \"null\"\r",
+									"        },\r",
+									"        \"createdBy\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"graderId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment1\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment2\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment3\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment4\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment5\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"assignmentDescription\",\r",
+									"        \"assignmentId\",\r",
+									"        \"assignmentName\",\r",
+									"        \"batchId\",\r",
+									"        \"comments\",\r",
+									"        \"createdBy\",\r",
+									"        \"dueDate\",\r",
+									"        \"graderId\",\r",
+									"        \"pathAttachment1\",\r",
+									"        \"pathAttachment2\",\r",
+									"        \"pathAttachment3\",\r",
+									"        \"pathAttachment4\",\r",
+									"        \"pathAttachment5\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"pm.test('Schema is valid',function(){\r",
+									"pm.expect(tv4.validate(jsondata,schema)).to.be.true;\r",
+									"});\r",
+									"//Filter \r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"var filteredData = jsonData.filter(function(item) {\r",
+									"  if (!item.assignmentName) {\r",
+									"    return\r",
+									"  }\r",
+									"  return item.assignmentName.includes(\"Jun23-APIc\");\r",
+									"});\r",
+									"console.log(\"filteredData\", filteredData);\r",
+									"    \r",
+									"\r",
+									"postman.setNextRequest(\"GET Assigment by ID\");\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "f8027699-ba72-4491-b197-1eb4157c8623",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseurl}}/assignments"
+					},
+					"response": []
+				},
+				{
+					"name": "GET Assigment by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c6c36854-cb20-4a47-9154-5edf330cc324",
+								"exec": [
+									"//Status Code Validation\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//Validate Response body content\r",
+									"pm.test(\"Newly created Assignment matches request attributes\",() => {\r",
+									"   var jsonData = pm.response.json(); \r",
+									"     pm.expect(jsonData).to.haveOwnProperty(\"assignmentId\");\r",
+									"   pm.expect(jsonData.assignmentName).to.include(\"Jun23-EliteForce-SDET - SQL104\");\r",
+									"   pm.expect(jsonData.assignmentDescription).to.include(\"this is first hackathon\");\r",
+									"   //pm.expect(jsonData.comments).to.include(\"\");\r",
+									"   pm.expect(jsonData.dueDate).to.include(\"2023-07-11T14:41:29.516+00:00\");\r",
+									"   pm.expect(jsonData.pathAttachment1).to.include(\"directional.mpga\");\r",
+									"   pm.expect(jsonData.pathAttachment2).to.include(\"invoice.weba\");\r",
+									"   pm.expect(jsonData.pathAttachment3).to.include(\"research_system.acu\");\r",
+									"   pm.expect(jsonData.pathAttachment4).to.include(\"multi_tasking_target.nlu\");\r",
+									"   pm.expect(jsonData.pathAttachment5).to.include(\"hawaii_awesome.ssdl\");\r",
+									"   pm.expect(jsonData).to.haveOwnProperty(\"batchId\");\r",
+									"   pm.expect(jsonData.createdBy).to.include(\"U3204\");\r",
+									"   pm.expect(jsonData.graderId).to.include(\"U3204\");\r",
+									"   \r",
+									"});\r",
+									"\r",
+									"\r",
+									"//JSON Schema validation\r",
+									"  var schema1 = {\r",
+									"  //\"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"assignmentDescription\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"assignmentId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"assignmentName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"batchId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"comments\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"createdBy\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"graderId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment1\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment2\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment3\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment4\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment5\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"assignmentDescription\",\r",
+									"        \"assignmentId\",\r",
+									"        \"assignmentName\",\r",
+									"        \"batchId\",\r",
+									"        \"comments\",\r",
+									"        \"createdBy\",\r",
+									"        \"dueDate\",\r",
+									"        \"graderId\",\r",
+									"        \"pathAttachment1\",\r",
+									"        \"pathAttachment2\",\r",
+									"        \"pathAttachment3\",\r",
+									"        \"pathAttachment4\",\r",
+									"        \"pathAttachment5\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Validate schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema1);\r",
+									"});\r",
+									"postman.setNextRequest(\"Neg GET Assignment by ID\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "87333a20-c699-4300-9664-62a50ecb876b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseurl}}/assignments/{{assigmentID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Neg GET Assignment by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "845c3aa0-d068-43a3-a1b3-5a9b96874d9a",
+								"exec": [
+									"//Status code validation\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"404: Not Found Error  with message and Boolean Success detail  – For Invalid Assignment ID\", () =>{\r",
+									"    pm.response.to.have.status(404);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include('Assignment not found with Id :');\r",
+									"});\r",
+									"postman.setNextRequest(\"GET Assignment by Batch ID\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "da71e043-cbe0-4ba3-ac64-fe7ebcbd5d70",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseurl}}/assignments/{{NegassigmentID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "GET Assignment by Batch ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a23518fb-732a-4712-b4a3-cb70e11ed6ca",
+								"exec": [
+									"//Status Code Validation\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"//JSON Schema validation\r",
+									"  var schema1 = {\r",
+									"  //\"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"assignmentDescription\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"assignmentId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"assignmentName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"batchId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"comments\": {\r",
+									"          \"type\": \"null\"\r",
+									"        },\r",
+									"        \"createdBy\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"graderId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment1\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment2\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment3\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment4\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment5\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"assignmentDescription\",\r",
+									"        \"assignmentId\",\r",
+									"        \"assignmentName\",\r",
+									"        \"batchId\",\r",
+									"        \"comments\",\r",
+									"        \"createdBy\",\r",
+									"        \"dueDate\",\r",
+									"        \"graderId\",\r",
+									"        \"pathAttachment1\",\r",
+									"        \"pathAttachment2\",\r",
+									"        \"pathAttachment3\",\r",
+									"        \"pathAttachment4\",\r",
+									"        \"pathAttachment5\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Validate schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema1);\r",
+									"});\r",
+									"    \r",
+									"//Filter \r",
+									"\r",
+									"// var jsonData = JSON.parse(responseBody);\r",
+									"// var val_bid =jsonData[0].batchId;\r",
+									"// var glb_batchid=pm.collectionVariables.get(\"batchID\");\r",
+									"// console.log(glb_batchid);\r",
+									"// console.log(val_bid);\r",
+									"// var filteredData = jsonData.filter(function(item) {\r",
+									"\r",
+									"//   //if (!item.jsonData.batchId) {\r",
+									"//   //    console.log(jsonData.response.batchId);\r",
+									"// //     return\r",
+									"// //   }\r",
+									"//    return item.batchId.includes(item);\r",
+									"//  });\r",
+									"// console.log(\"filteredData\", filteredData);\r",
+									"    \r",
+									"postman.setNextRequest(\"Neg GET Assignment by Batch ID\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "becdf096-0065-472b-865a-f11c297090ce",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseurl}}/assignments/batch/{{batchID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Neg GET Assignment by Batch ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "88b8029d-69ca-4299-a6e6-b9180d4e6a5f",
+								"exec": [
+									"//Status code validation\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"404: Not Found Error  with message and Boolean Success detail  – For Invalid Batch ID\", () =>{\r",
+									"    pm.response.to.have.status(404);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include(\"Batch not found with Id\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "136fe495-6555-45a9-b6f6-d76f6d7b44ee",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseurl}}/assignments/batch/{{NegbatchID}}\n"
+					},
+					"response": []
+				},
+				{
+					"name": "Neg GET Assignment by Valid BatchID and No Assignment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b4ff42a5-1c6d-41b4-948f-899a41462143",
+								"exec": [
+									"//Status code validation\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"404: Not Found Error  with message and Boolean Success detail  – Valid Batch ID and No Assignment\", () =>{\r",
+									"    pm.response.to.have.status(404);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include('Assignments not found with BatchId : ');\r",
+									"});\r",
+									"postman.setNextRequest(\"Create First Assignment\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "ca92cb38-2623-46c7-9694-406d511bc5f7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseurl}}/assignments/batch/{{batch_ID}}"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "8b6c23a8-ed59-42a0-bda9-85bb24c5967a"
+		},
+		{
+			"name": "Negative POST",
+			"item": [
+				{
+					"name": "Create First Assignment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ecc6c72e-25d3-4406-9c06-8f4dfb097b98",
+								"exec": [
+									"//Status Code Validation\r",
+									"pm.test(\"Status code is 201\", () => {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"//JSON Schema validation\r",
+									"  var schema1 = {\r",
+									"  //\"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"assignmentDescription\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"assignmentId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"assignmentName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"batchId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"comments\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"createdBy\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"graderId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment1\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment2\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment3\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment4\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment5\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"assignmentDescription\",\r",
+									"        \"assignmentId\",\r",
+									"        \"assignmentName\",\r",
+									"        \"batchId\",\r",
+									"        \"comments\",\r",
+									"        \"createdBy\",\r",
+									"        \"dueDate\",\r",
+									"        \"graderId\",\r",
+									"        \"pathAttachment1\",\r",
+									"        \"pathAttachment2\",\r",
+									"        \"pathAttachment3\",\r",
+									"        \"pathAttachment4\",\r",
+									"        \"pathAttachment5\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Validate schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema1);\r",
+									"});\r",
+									"\r",
+									"//Response Validation\r",
+									"\r",
+									"pm.test(\"Newly created Program matches request attributes\",() => {\r",
+									"   var jsonData = pm.response.json(); \r",
+									"  \r",
+									"   pm.expect(jsonData.assignmentDescription).to.include(\"java descitption\");\r",
+									"   pm.expect(jsonData).to.haveOwnProperty(\"assignmentId\");\r",
+									"   pm.expect(jsonData.assignmentName).to.include(\"Jun23-APIc Scripters-SDET-JAVA-\");\r",
+									"   pm.expect(jsonData).to.haveOwnProperty(\"batchId\");\r",
+									"   pm.expect(jsonData.comments).to.include(\"comm\");\r",
+									"   pm.expect(jsonData.createdBy).to.include(\"U1181\");\r",
+									"   pm.expect(jsonData.dueDate).to.include(\"2023-06-19T22:02:28.140+00:00\");\r",
+									"   pm.expect(jsonData.graderId).to.include(\"U1172\");\r",
+									"   pm.expect(jsonData.pathAttachment1).to.include(\"Filepath1\");\r",
+									"   pm.expect(jsonData.pathAttachment2).to.include(\"Filepath2\");\r",
+									"   pm.expect(jsonData.pathAttachment3).to.include(\"Filepath3\");\r",
+									"   pm.expect(jsonData.pathAttachment4).to.include(\"Filepath4\");\r",
+									"   pm.expect(jsonData.pathAttachment5).to.include(\"Filepath5\");\r",
+									"   \r",
+									"});\r",
+									" //Chaining\r",
+									" var jsondata=pm.response.json();\r",
+									"var Newassign_mentId=jsondata.assignmentId;\r",
+									" pm.globals.set(\"Assign_mentID\", Newassign_mentId);\r",
+									" console.log(Newassign_mentId);\r",
+									"\r",
+									"postman.setNextRequest(\"Negative create with Existing Assignment name\");\r",
+									"\r",
+									"    "
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "beeb1f83-9bb0-40ef-be0c-5230f045ea0d",
+								"exec": [
+									"var assignmentName= \"Jun23-APIc Scripters-SDET-JAVA-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+									"pm.collectionVariables.set(\"assignmentDescription\", \"java descitption\");\r",
+									"pm.collectionVariables.set( \"assignmentId\",0);\r",
+									"pm.globals.set(\"assignmentName\", assignmentName);\r",
+									"pm.collectionVariables.set(\"batchId\", \"220\" );\r",
+									"pm.collectionVariables.set(\"comments\",\"comm\");\r",
+									"pm.collectionVariables.set(\"createdBy\", \"U1181\" );\r",
+									"pm.collectionVariables.set(\"dueDate\",\"2023-06-19T22:02:28.140Z\",);\r",
+									"pm.collectionVariables.set(\"graderId\", \"U1172\");\r",
+									"pm.collectionVariables.set(\"pathAttachment1\",\"Filepath1\");\r",
+									"pm.collectionVariables.set(\"pathAttachment2\",\"Filepath2\");\r",
+									"pm.collectionVariables.set(\"pathAttachment3\",\"Filepath3\");\r",
+									"pm.collectionVariables.set(\"pathAttachment4\",\"Filepath4\");\r",
+									"pm.collectionVariables.set(\"pathAttachment5\",\"Filepath5\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "d4362cfc-9d05-47ba-9f6a-03e11940303e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\r\n  \"assignmentId\": 0,\r\n  \"assignmentName\": \"{{assignmentName}}\",\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"dueDate\": \"{{dueDate}}\",\r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments"
+					},
+					"response": []
+				},
+				{
+					"name": "Negative create with Existing Assignment name",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "8309ce89-e733-4c57-ada8-7f612f7b1555",
+								"exec": [
+									"//var assignmentName= \"Jun23-APIc Scripters-SDET-SQL-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+									"pm.collectionVariables.set(\"assignmentDescription\", \"Selenium with Java\");\r",
+									"pm.collectionVariables.set( \"assignmentId\",1368);\r",
+									"//pm.globals.set(\"assignmentName\", assignmentName);\r",
+									"pm.collectionVariables.set(\"batchId\", \"220\" );\r",
+									"pm.collectionVariables.set(\"comments\",\"null\");\r",
+									"pm.collectionVariables.set(\"createdBy\", \"U2401\" );\r",
+									"pm.collectionVariables.set(\"dueDate\",\"2023-06-30T22:02:28.140+00:00\",);\r",
+									"pm.collectionVariables.set(\"graderId\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"pathAttachment1\",\"Attachment1\");\r",
+									"pm.collectionVariables.set(\"pathAttachment2\",\"Attachment2\");\r",
+									"pm.collectionVariables.set(\"pathAttachment3\",\"Attachment3\");\r",
+									"pm.collectionVariables.set(\"pathAttachment4\",\"Attachment4\");\r",
+									"pm.collectionVariables.set(\"pathAttachment5\",\"Attachment5\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1040f9d7-efcb-43bb-ba9b-2d03acccf282",
+								"exec": [
+									"//status code validation\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"404: Not Found Error  with message and Boolean Success detail  – For Existing Assignment Name\", () =>{\r",
+									"    pm.response.to.have.status(400);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include('Assignment Name is mandatory');\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "d27e5098-f67f-4169-8e97-c0d9383532cb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\r\n  \"assignmentId\": 0,\r\n  \"assignmentName\": \"\",\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"dueDate\": \"2023-06-19T22:02:28.140Z\",\r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments/batch/{{batch_ID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Negative assignemnt for invalid create by",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "78cdab7c-9606-4ae7-ba07-e763c20ed21c",
+								"exec": [
+									"var assignmentName = \"Jun23-APIc Scripters-SDET-SQL-\" + pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+									"pm.globals.unset(\"variable_key\");\r",
+									"pm.collectionVariables.set(\"assignmentDescription\", \"Selenium with Java\");\r",
+									"pm.collectionVariables.set( \"assignmentId\",1368);\r",
+									"pm.globals.set(\"assignmentName\", assignmentName);\r",
+									"pm.collectionVariables.set(\"batchId\", \"220\" );\r",
+									"pm.collectionVariables.set(\"comments\",\"null\");\r",
+									"pm.collectionVariables.set(\"createdBy\", \"\" );\r",
+									"pm.collectionVariables.set(\"dueDate\",\"2023-06-30T22:02:28.140+00:00\",);\r",
+									"pm.collectionVariables.set(\"graderId\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"pathAttachment1\",\"Attachment1\");\r",
+									"pm.collectionVariables.set(\"pathAttachment2\",\"Attachment2\");\r",
+									"pm.collectionVariables.set(\"pathAttachment3\",\"Attachment3\");\r",
+									"pm.collectionVariables.set(\"pathAttachment4\",\"Attachment4\");\r",
+									"pm.collectionVariables.set(\"pathAttachment5\",\"Attachment5\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "8a2b82e0-a4a4-49ad-bacd-ec6b3aa62fc9",
+								"exec": [
+									"\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"400: Bad Request Error  with message and Boolean Success detail  – For Invalid Create By\", () =>{\r",
+									"    pm.response.to.have.status(400);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include(\"Created By is mandatory\");\r",
+									"});\r",
+									"postman.setNextRequest(\"Negative assignment for Invalid GraderId\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "936ac9ef-878f-4479-9a01-9f030be4cc62",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\r\n  \"assignmentId\": 0,\r\n  \"assignmentName\": \"{{assignmentName}}\",\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"dueDate\": \"2023-06-19T22:02:28.140Z\",\r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments"
+					},
+					"response": []
+				},
+				{
+					"name": "Negative assignment for Invalid GraderId",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "0dd1d2e3-1db8-4308-aafe-422f760250e7",
+								"exec": [
+									"var assignmentName= \"Jun23-APIc Scripters-SDET-SQL-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+									"pm.collectionVariables.set(\"assignmentDescription\", \"Selenium with Java\");\r",
+									"pm.collectionVariables.set( \"assignmentId\",1368);\r",
+									"pm.globals.set(\"assignmentName\", assignmentName);\r",
+									"pm.collectionVariables.set(\"batchId\", \"220\" );\r",
+									"pm.collectionVariables.set(\"comments\",\"null\");\r",
+									"pm.collectionVariables.set(\"createdBy\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"dueDate\",\"2023-06-30T22:02:28.140+00:00\",);\r",
+									"pm.collectionVariables.set(\"graderId\", \"\");\r",
+									"pm.collectionVariables.set(\"pathAttachment1\",\"Attachment1\");\r",
+									"pm.collectionVariables.set(\"pathAttachment2\",\"Attachment2\");\r",
+									"pm.collectionVariables.set(\"pathAttachment3\",\"Attachment3\");\r",
+									"pm.collectionVariables.set(\"pathAttachment4\",\"Attachment4\");\r",
+									"pm.collectionVariables.set(\"pathAttachment5\",\"Attachment5\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "21505540-16ed-48bb-9624-a113db36501e",
+								"exec": [
+									"\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"400: Bad Request Error  with message and Boolean Success detail  – For Invalid Grader ID\", () =>{\r",
+									"    pm.response.to.have.status(400);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include(\"Grader ID is mandatory\");\r",
+									"});\r",
+									"postman.setNextRequest(\"Negative Assignment for Invalid batchiD\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "730aeeba-4a5b-4060-b326-146b8d7ff958",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\r\n  \"assignmentId\": 0,\r\n  \"assignmentName\": \"{{assignmentName}}\",\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"dueDate\": \"2023-06-19T22:02:28.140Z\",\r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments"
+					},
+					"response": []
+				},
+				{
+					"name": "Negative Assignment for Invalid batchiD",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "76077d0c-fd01-41bb-8d4c-c8d3c2deabb8",
+								"exec": [
+									"var assignmentName= \"Jun23-APIc Scripters-SDET-SQL-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+									"pm.collectionVariables.set(\"assignmentDescription\", \"Selenium with Java\");\r",
+									"pm.collectionVariables.set( \"assignmentId\",1368);\r",
+									"pm.globals.set(\"assignmentName\", assignmentName);\r",
+									"pm.collectionVariables.set(\"batchId\", \"\" );\r",
+									"pm.collectionVariables.set(\"comments\",\"null\");\r",
+									"pm.collectionVariables.set(\"createdBy\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"dueDate\",\"2023-06-30T22:02:28.140+00:00\",);\r",
+									"pm.collectionVariables.set(\"graderId\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"pathAttachment1\",\"Attachment1\");\r",
+									"pm.collectionVariables.set(\"pathAttachment2\",\"Attachment2\");\r",
+									"pm.collectionVariables.set(\"pathAttachment3\",\"Attachment3\");\r",
+									"pm.collectionVariables.set(\"pathAttachment4\",\"Attachment4\");\r",
+									"pm.collectionVariables.set(\"pathAttachment5\",\"Attachment5\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1ee8c521-aa50-441b-8e68-1f6dacef91d6",
+								"exec": [
+									"//status code validation\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"404: Not Found Error  with message and Boolean Success detail  – For Invalid Batch ID\", () =>{\r",
+									"    pm.response.to.have.status(400);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include(\"Batch ID is mandatory\");\r",
+									"});\r",
+									"postman.setNextRequest(\"Negative Assignemnt for Invalid Path Attachment\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "db7b25ff-cf47-41a6-b812-79e7c4804d80",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\r\n  \"assignmentId\": 0,\r\n  \"assignmentName\": \"{{assignmentName}}\",\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"dueDate\": \"2023-06-19T22:02:28.140Z\",\r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments"
+					},
+					"response": []
+				},
+				{
+					"name": "Negative Assignment for Assignment Description",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "b7aab25f-9ac3-4d47-8403-57cfc3bd61a5",
+								"exec": [
+									"var assignmentName= \"Jun23-APIc Scripters-SDET-SQL-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+									"pm.collectionVariables.set(\"assignmentDescription\", \"\");\r",
+									"pm.collectionVariables.set( \"assignmentId\",1368);\r",
+									"pm.globals.set(\"assignmentName\", assignmentName);\r",
+									"pm.collectionVariables.set(\"batchId\", \"15\" );\r",
+									"pm.collectionVariables.set(\"comments\",\"null\");\r",
+									"pm.collectionVariables.set(\"createdBy\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"dueDate\",\"2023-06-30T22:02:28.140+00:00\",);\r",
+									"pm.collectionVariables.set(\"graderId\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"pathAttachment1\",\"Attachment1\");\r",
+									"pm.collectionVariables.set(\"pathAttachment2\",\"Attachment2\");\r",
+									"pm.collectionVariables.set(\"pathAttachment3\",\"Attachment3\");\r",
+									"pm.collectionVariables.set(\"pathAttachment4\",\"Attachment4\");\r",
+									"pm.collectionVariables.set(\"pathAttachment5\",\"Attachment5\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "98d9ce61-075f-441a-9cba-5fb7785f474d",
+								"exec": [
+									"//status code validation\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"404: Not Found Error  with message and Boolean Success detail  – For Invalid Assignment Desription\", () =>{\r",
+									"    pm.response.to.have.status(400);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include(\"Assignment Description is mandatory\");\r",
+									"});\r",
+									"postman.setNextRequest(\"Negative Assignment for Invalid duedate\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "46efe769-76bf-4118-abec-02bec08ece86",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\r\n  \"assignmentId\": 0,\r\n  \"assignmentName\": \"{{assignmentName}}\",\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"dueDate\": \"2023-06-19T22:02:28.140Z\",\r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments"
+					},
+					"response": []
+				},
+				{
+					"name": "Negative Assignment for Invalid duedate",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "1df5c560-615b-4221-8e95-8c54d16148dc",
+								"exec": [
+									"var assignmentName= \"Jun23-APIc Scripters-SDET-SQL-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+									"pm.collectionVariables.set(\"assignmentDescription\", \"Selenium with Java\");\r",
+									"pm.collectionVariables.set( \"assignmentId\",1368);\r",
+									"pm.globals.set(\"assignmentName\", assignmentName);\r",
+									"pm.collectionVariables.set(\"batchId\", \"2\" );\r",
+									"pm.collectionVariables.set(\"comments\",\"null\");\r",
+									"pm.collectionVariables.set(\"createdBy\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"graderId\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"pathAttachment1\",\"Attachment1\");\r",
+									"pm.collectionVariables.set(\"pathAttachment2\",\"Attachment2\");\r",
+									"pm.collectionVariables.set(\"pathAttachment3\",\"Attachment3\");\r",
+									"pm.collectionVariables.set(\"pathAttachment4\",\"Attachment4\");\r",
+									"pm.collectionVariables.set(\"pathAttachment5\",\"Attachment5\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "92b3a856-580a-4287-8548-479e42e2b75a",
+								"exec": [
+									"//status code validation\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"404: Not Found Error  with message and Boolean Success detail  – For Invalid Duedate\", () =>{\r",
+									"    pm.response.to.have.status(400);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include(\"Due Date is mandatory\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "7179c0be-fc93-4947-9f8f-4835ecfcc6da",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\r\n  \"assignmentId\": 0,\r\n  \"assignmentName\": \"{{assignmentName}}\",\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"dueDate\": \"\",\r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "54230f5c-1967-41d9-9a0a-aa34d78c23f4"
+		},
+		{
+			"name": "PUT",
+			"item": [
+				{
+					"name": "Update Assignment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b94f8d86-d6f3-4ceb-bb2c-a3a91c810531",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									"\r",
+									"//JSON Schema validation\r",
+									"  var schema1 = {\r",
+									"  //\"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"assignmentDescription\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"assignmentId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"assignmentName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"batchId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"comments\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"createdBy\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"graderId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment1\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment2\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment3\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment4\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment5\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"assignmentDescription\",\r",
+									"        \"assignmentId\",\r",
+									"        \"assignmentName\",\r",
+									"        \"batchId\",\r",
+									"        \"comments\",\r",
+									"        \"createdBy\",\r",
+									"        \"dueDate\",\r",
+									"        \"graderId\",\r",
+									"        \"pathAttachment1\",\r",
+									"        \"pathAttachment2\",\r",
+									"        \"pathAttachment3\",\r",
+									"        \"pathAttachment4\",\r",
+									"        \"pathAttachment5\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Validate schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema1);\r",
+									"});\r",
+									"postman.setNextRequest(\"Negative Update  with  existing Assignment  name\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "363382ee-0762-450c-9e96-d2c7c40465f7",
+								"exec": [
+									"var assignmentName= \"Jun23-APIc Scripters-SDET-SQL-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+									"pm.collectionVariables.set(\"assignmentDescription\", \"Java with Selenium\");\r",
+									"pm.collectionVariables.set( \"assignmentId\",1589);\r",
+									"pm.globals.set(\"assignmentName\", \"Selenium assignment\");\r",
+									"pm.collectionVariables.set(\"batchId\", \"220\" );\r",
+									"pm.collectionVariables.set(\"comments\",\"null\");\r",
+									"pm.collectionVariables.set(\"createdBy\", \"U2294\" );\r",
+									"pm.collectionVariables.set(\"dueDate\",\"2023-06-30T22:02:28.140+00:00\",);\r",
+									"pm.collectionVariables.set(\"graderId\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"pathAttachment1\",\"Attachment1\");\r",
+									"pm.collectionVariables.set(\"pathAttachment2\",\"Attachment2\");\r",
+									"pm.collectionVariables.set(\"pathAttachment3\",\"Attachment3\");\r",
+									"pm.collectionVariables.set(\"pathAttachment4\",\"Attachment4\");\r",
+									"pm.collectionVariables.set(\"pathAttachment5\",\"Attachment5\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "812ec602-6354-43e7-94b2-e55aa126b83e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\r\n  \"assignmentId\":{{Assign_mentID}},\r\n  \"assignmentName\": \"{{assignmentName}}\",\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"dueDate\": \"2023-06-19T22:02:28.140Z\",\r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments/{{Assign_mentID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Negative Update  with  existing Assignment  name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "9f6ffc7a-ea84-4336-b386-d09a9b3e5769",
+								"exec": [
+									"//status code validation\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"//JSON Schema validation\r",
+									"  var schema1 = {\r",
+									"  //\"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"assignmentDescription\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"assignmentId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"assignmentName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"batchId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"comments\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"createdBy\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"graderId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment1\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment2\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment3\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment4\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment5\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"assignmentDescription\",\r",
+									"        \"assignmentId\",\r",
+									"        \"assignmentName\",\r",
+									"        \"batchId\",\r",
+									"        \"comments\",\r",
+									"        \"createdBy\",\r",
+									"        \"dueDate\",\r",
+									"        \"graderId\",\r",
+									"        \"pathAttachment1\",\r",
+									"        \"pathAttachment2\",\r",
+									"        \"pathAttachment3\",\r",
+									"        \"pathAttachment4\",\r",
+									"        \"pathAttachment5\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Validate schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema1);\r",
+									"});\r",
+									"    \r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"400: Bad Request with message and boolean success details - for missing field Assignment Name\", () =>{\r",
+									"    pm.response.to.have.status(400);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include('Assignment Name is mandatory');\r",
+									"});\r",
+									"postman.setNextRequest(\"Negative Update Assignment for Invalid create by\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "5b49d6ed-d8a5-4bc6-8148-884d88dcd3c8",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\r\n  \"assignmentId\": 0,\r\n  \"assignmentName\": \"\",\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"dueDate\": \"2023-06-19T22:02:28.140Z\",\r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments/{{Assign_mentID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Negative Update Assignment for Invalid create by",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c147fbd6-4bce-4f26-a4a1-f3c09a7a4e05",
+								"exec": [
+									"//status code validation\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"//JSON Schema validation\r",
+									"  var schema1 = {\r",
+									"  //\"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"assignmentDescription\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"assignmentId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"assignmentName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"batchId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"comments\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"createdBy\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"graderId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment1\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment2\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment3\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment4\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment5\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"assignmentDescription\",\r",
+									"        \"assignmentId\",\r",
+									"        \"assignmentName\",\r",
+									"        \"batchId\",\r",
+									"        \"comments\",\r",
+									"        \"createdBy\",\r",
+									"        \"dueDate\",\r",
+									"        \"graderId\",\r",
+									"        \"pathAttachment1\",\r",
+									"        \"pathAttachment2\",\r",
+									"        \"pathAttachment3\",\r",
+									"        \"pathAttachment4\",\r",
+									"        \"pathAttachment5\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Validate schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema1);\r",
+									"});\r",
+									"    \r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"400: Bad Request with message and boolean success details - for missing field Created By \", () =>{\r",
+									"    pm.response.to.have.status(400);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include('Created By is mandatory');\r",
+									"});\r",
+									"postman.setNextRequest(\"Negative Update Assignment for Invalid GraderId\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "b3a006f5-39c0-4463-b1c1-0060f7b65288",
+								"exec": [
+									"var assignmentName= \"Jun23-APIc Scripters-SDET-SQL-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+									"pm.collectionVariables.set(\"assignmentDescription\", \"Selenium with Java\");\r",
+									"pm.collectionVariables.set( \"assignmentId\",1368);\r",
+									"pm.globals.set(\"assignmentName\", assignmentName);\r",
+									"pm.collectionVariables.set(\"batchId\", \"220\" );\r",
+									"pm.collectionVariables.set(\"comments\",\"null\");\r",
+									"//pm.collectionVariables.set(\"createdBy\", \"U2007\" );\r",
+									"pm.collectionVariables.set(\"dueDate\",\"2023-06-30T22:02:28.140+00:00\",);\r",
+									"pm.collectionVariables.set(\"graderId\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"pathAttachment1\",\"Attachment1\");\r",
+									"pm.collectionVariables.set(\"pathAttachment2\",\"Attachment2\");\r",
+									"pm.collectionVariables.set(\"pathAttachment3\",\"Attachment3\");\r",
+									"pm.collectionVariables.set(\"pathAttachment4\",\"Attachment4\");\r",
+									"pm.collectionVariables.set(\"pathAttachment5\",\"Attachment5\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "1eb089e8-0bf7-4724-901d-cc5ab4b7e0ac",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\r\n  \"assignmentId\": 0,\r\n  \"assignmentName\": \"{{assignmentName}}\",\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"\",\r\n  \"dueDate\": \"2023-06-19T22:02:28.140Z\",\r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments/{{Assign_mentID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Negative Update Assignment for Invalid GraderId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4dbefc22-67da-4455-b657-b55f36abb15b",
+								"exec": [
+									"//status code validation\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"//JSON Schema validation\r",
+									"  var schema1 = {\r",
+									"  //\"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"assignmentDescription\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"assignmentId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"assignmentName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"batchId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"comments\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"createdBy\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"graderId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment1\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment2\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment3\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment4\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment5\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"assignmentDescription\",\r",
+									"        \"assignmentId\",\r",
+									"        \"assignmentName\",\r",
+									"        \"batchId\",\r",
+									"        \"comments\",\r",
+									"        \"createdBy\",\r",
+									"        \"dueDate\",\r",
+									"        \"graderId\",\r",
+									"        \"pathAttachment1\",\r",
+									"        \"pathAttachment2\",\r",
+									"        \"pathAttachment3\",\r",
+									"        \"pathAttachment4\",\r",
+									"        \"pathAttachment5\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Validate schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema1);\r",
+									"});\r",
+									"    \r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"400: Bad Request with message and boolean success details - for missing field Grader Id \", () =>{\r",
+									"    pm.response.to.have.status(400);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include('Grader ID is mandatory');\r",
+									"});\r",
+									"postman.setNextRequest(\"Negative Update Assignemnt for Invalid BatchId\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "78b3d60c-8186-4210-8acc-d79c0d5d9c11",
+								"exec": [
+									"var assignmentName= \"Jun23-APIc Scripters-SDET-SQL-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+									"pm.collectionVariables.set(\"assignmentDescription\", \"Selenium with Java\");\r",
+									"pm.collectionVariables.set( \"assignmentId\",1368);\r",
+									"pm.globals.set(\"assignmentName\", assignmentName);\r",
+									"pm.collectionVariables.set(\"batchId\", \"220\" );\r",
+									"pm.collectionVariables.set(\"comments\",\"null\");\r",
+									"pm.collectionVariables.set(\"createdBy\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"dueDate\",\"2023-06-30T22:02:28.140+00:00\",);\r",
+									"//pm.collectionVariables.set(\"graderId\", \"U401\");\r",
+									"pm.collectionVariables.set(\"pathAttachment1\",\"Attachment1\");\r",
+									"pm.collectionVariables.set(\"pathAttachment2\",\"Attachment2\");\r",
+									"pm.collectionVariables.set(\"pathAttachment3\",\"Attachment3\");\r",
+									"pm.collectionVariables.set(\"pathAttachment4\",\"Attachment4\");\r",
+									"pm.collectionVariables.set(\"pathAttachment5\",\"Attachment5\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "1d30e1a7-36cc-4560-84e7-db0142273fd2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\r\n  \"assignmentId\": 0,\r\n  \"assignmentName\": \"{{assignmentName}}\",\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"dueDate\": \"2023-06-19T22:02:28.140Z\",\r\n  \"graderId\": \"\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments/{{Assign_mentID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Negative Update Assignemnt for Invalid BatchId",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "5eb6a3fb-73e8-4097-9201-cd5608dba39b",
+								"exec": [
+									"//status code validation\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"//JSON Schema validation\r",
+									"  var schema1 = {\r",
+									"  //\"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"assignmentDescription\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"assignmentId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"assignmentName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"batchId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"comments\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"createdBy\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"graderId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment1\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment2\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment3\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment4\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment5\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"assignmentDescription\",\r",
+									"        \"assignmentId\",\r",
+									"        \"assignmentName\",\r",
+									"        \"batchId\",\r",
+									"        \"comments\",\r",
+									"        \"createdBy\",\r",
+									"        \"dueDate\",\r",
+									"        \"graderId\",\r",
+									"        \"pathAttachment1\",\r",
+									"        \"pathAttachment2\",\r",
+									"        \"pathAttachment3\",\r",
+									"        \"pathAttachment4\",\r",
+									"        \"pathAttachment5\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Validate schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema1);\r",
+									"});\r",
+									"\r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"400: Bad Request with message and boolean success details - for missing field Batch Id \", () =>{\r",
+									"    pm.response.to.have.status(400);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include('Batch ID is mandatory');\r",
+									"});\r",
+									"postman.setNextRequest(\"Negative Update Assignment for Invalid Duedate\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "7f08d248-880d-437a-90de-e3431e5e3817",
+								"exec": [
+									"var assignmentName= \"Jun23-APIc Scripters-SDET-SQL-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+									"pm.collectionVariables.set(\"assignmentDescription\", \"Selenium with Java\");\r",
+									"pm.collectionVariables.set( \"assignmentId\",1368);\r",
+									"pm.globals.set(\"assignmentName\", assignmentName);\r",
+									"//pm.collectionVariables.set(\"batchId\", \"4567\" );\r",
+									"pm.collectionVariables.set(\"comments\",\"null\");\r",
+									"pm.collectionVariables.set(\"createdBy\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"dueDate\",\"2023-06-30T22:02:28.140+00:00\",);\r",
+									"pm.collectionVariables.set(\"graderId\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"pathAttachment1\",\"Attachment1\");\r",
+									"pm.collectionVariables.set(\"pathAttachment2\",\"Attachment2\");\r",
+									"pm.collectionVariables.set(\"pathAttachment3\",\"Attachment3\");\r",
+									"pm.collectionVariables.set(\"pathAttachment4\",\"Attachment4\");\r",
+									"pm.collectionVariables.set(\"pathAttachment5\",\"Attachment5\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "810597c3-bd63-4584-9a85-66bf116f6039",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\r\n  \"assignmentId\": 0,\r\n  \"assignmentName\": \"{{assignmentName}}\",\r\n  \"batchId\": \"\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"dueDate\": \"2023-06-19T22:02:28.140Z\",\r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments/{{Assign_mentID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Negative Update Assignment for Invalid Duedate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b8cd35de-aa5a-4619-b226-765c303aa5a7",
+								"exec": [
+									"//status code validation\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"//JSON Schema validation\r",
+									"  var schema1 = {\r",
+									"  //\"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"assignmentDescription\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"assignmentId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"assignmentName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"batchId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"comments\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"createdBy\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"graderId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment1\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment2\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment3\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment4\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment5\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"assignmentDescription\",\r",
+									"        \"assignmentId\",\r",
+									"        \"assignmentName\",\r",
+									"        \"batchId\",\r",
+									"        \"comments\",\r",
+									"        \"createdBy\",\r",
+									"        \"dueDate\",\r",
+									"        \"graderId\",\r",
+									"        \"pathAttachment1\",\r",
+									"        \"pathAttachment2\",\r",
+									"        \"pathAttachment3\",\r",
+									"        \"pathAttachment4\",\r",
+									"        \"pathAttachment5\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Validate schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema1);\r",
+									"});\r",
+									"    \r",
+									"\r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"400: Bad Request with message and boolean success details - for missing field Duedate \", () =>{\r",
+									"    pm.response.to.have.status(400);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include('Due Date is mandatory');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "e7fbb869-499f-4c5f-b465-fdf4f14b28b7",
+								"exec": [
+									"var assignmentName= \"Jun23-APIc Scripters-SDET-SQL-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+									"pm.collectionVariables.set(\"assignmentDescription\", \"Selenium with Java\");\r",
+									"pm.collectionVariables.set( \"assignmentId\",1368);\r",
+									"pm.globals.set(\"assignmentName\", assignmentName);\r",
+									"pm.collectionVariables.set(\"batchId\", \"2\" );\r",
+									"pm.collectionVariables.set(\"comments\",\"null\");\r",
+									"pm.collectionVariables.set(\"createdBy\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"graderId\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"pathAttachment1\",\"Attachment1\");\r",
+									"pm.collectionVariables.set(\"pathAttachment2\",\"Attachment2\");\r",
+									"pm.collectionVariables.set(\"pathAttachment3\",\"Attachment3\");\r",
+									"pm.collectionVariables.set(\"pathAttachment4\",\"Attachment4\");\r",
+									"pm.collectionVariables.set(\"pathAttachment5\",\"Attachment5\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "5b8d5256-729e-45c5-9a66-0ba1bfd7242c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\r\n  \"assignmentId\": 0,\r\n  \"assignmentName\": \"{{assignmentName}}\",\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"dueDate\": \"\",\r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments/{{Assign_mentID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Negative Update Assignment for Invalid Assignment Description",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "051d6488-4061-4d2d-ab22-82860002fc2a",
+								"exec": [
+									"//status code validation\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"//JSON Schema validation\r",
+									"  var schema1 = {\r",
+									"  //\"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"assignmentDescription\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"assignmentId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"assignmentName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"batchId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"comments\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"createdBy\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"graderId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment1\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment2\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment3\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment4\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment5\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"assignmentDescription\",\r",
+									"        \"assignmentId\",\r",
+									"        \"assignmentName\",\r",
+									"        \"batchId\",\r",
+									"        \"comments\",\r",
+									"        \"createdBy\",\r",
+									"        \"dueDate\",\r",
+									"        \"graderId\",\r",
+									"        \"pathAttachment1\",\r",
+									"        \"pathAttachment2\",\r",
+									"        \"pathAttachment3\",\r",
+									"        \"pathAttachment4\",\r",
+									"        \"pathAttachment5\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Validate schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema1);\r",
+									"});\r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"400: Bad Request with message and boolean success details - for missing field Duedate \", () =>{\r",
+									"    pm.response.to.have.status(400);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include('Assignment Description is mandatory');\r",
+									"});\r",
+									"postman.setNextRequest(\"DELETE Assignemnt by ID\");"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "7c06bbb5-e76b-479c-8761-7ff26c2d872b",
+								"exec": [
+									"var assignmentName= \"Jun23-APIc Scripters-SDET-SQL-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+									"//pm.collectionVariables.set(\"assignmentDescription\", \"\");\r",
+									"pm.collectionVariables.set( \"assignmentId\",1368);\r",
+									"pm.globals.set(\"assignmentName\", assignmentName);\r",
+									"pm.collectionVariables.set(\"batchId\", \"15\" );\r",
+									"pm.collectionVariables.set(\"comments\",\"null\");\r",
+									"pm.collectionVariables.set(\"createdBy\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"dueDate\",\"2023-06-30T22:02:28.140+00:00\",);\r",
+									"pm.collectionVariables.set(\"graderId\", \"U2401\");\r",
+									"pm.collectionVariables.set(\"pathAttachment1\",\"Attachment1\");\r",
+									"pm.collectionVariables.set(\"pathAttachment2\",\"Attachment2\");\r",
+									"pm.collectionVariables.set(\"pathAttachment3\",\"Attachment3\");\r",
+									"pm.collectionVariables.set(\"pathAttachment4\",\"Attachment4\");\r",
+									"pm.collectionVariables.set(\"pathAttachment5\",\"Attachment5\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "a252d4b1-1c48-4999-96e6-cef4d55bbe9a",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"\",\r\n  \"assignmentId\": 0,\r\n  \"assignmentName\": \"{{assignmentName}}\",\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"dueDate\": \"2023-06-19T22:02:28.140Z\",\r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments/{{Assign_mentID}}"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "0d9b393f-0ba0-4a4c-a99e-bc91a5d92ab5"
+		},
+		{
+			"name": "DELETE",
+			"item": [
+				{
+					"name": "DELETE Assignemnt by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "609d4f37-ba57-4681-aec5-4af67240d911",
+								"exec": [
+									"\r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"status code-200 ok\", () => {\r",
+									"    pm.response.to.have.status(200);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include('Assignment deleted successfully');\r",
+									"});\r",
+									"postman.setNextRequest(\"Negative  Assignment Delete by ID\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "37e02ffa-22a4-4881-9b97-a3e05ec381dd",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseurl}}/assignments/{{Assign_mentID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Negative  Assignment Delete by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "7a0647be-1656-4f04-8575-14c358cb2e86",
+								"exec": [
+									"\r",
+									"// pm.test(\"Assignment Deleted Successfully\", function () {\r",
+									"//     pm.expect(pm.response.text()).to.include(\"Assignment not found with Id\");\r",
+									"    \r",
+									"// });\r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"404 Not Found with message and boolean success details- invalid Assignment Id \", () =>{\r",
+									"    pm.response.to.have.status(404);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include('Assignment not found with Id');\r",
+									"});\r",
+									"postman.setNextRequest(\"Create Assigment DD\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "3f0d74cd-bd53-431c-8fda-990707f4d6ef",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseurl}}/assignments/{{Neg_Assign_mentID}}"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "37d80672-7d33-4172-b263-c6483e91b926"
+		},
+		{
+			"name": "Data Driven Assignment Module",
+			"item": [
+				{
+					"name": "Create Assigment DD",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ff27db1d-fb67-44dd-ba23-0723ad201f0e",
+								"exec": [
+									"\r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.test(\"201 Created\",() =>{\r",
+									"    pm.response.to.have.status(201);;\r",
+									"    \r",
+									"    pm.expect(jsonData.message).to.include('201 Created');\r",
+									"});\r",
+									"\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"//JSON Schema validation\r",
+									"  var schema1 = {\r",
+									"  //\"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"assignmentDescription\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"assignmentId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"assignmentName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"batchId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"comments\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"createdBy\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"graderId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment1\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment2\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment3\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment4\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment5\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"assignmentDescription\",\r",
+									"        \"assignmentId\",\r",
+									"        \"assignmentName\",\r",
+									"        \"batchId\",\r",
+									"        \"comments\",\r",
+									"        \"createdBy\",\r",
+									"        \"dueDate\",\r",
+									"        \"graderId\",\r",
+									"        \"pathAttachment1\",\r",
+									"        \"pathAttachment2\",\r",
+									"        \"pathAttachment3\",\r",
+									"        \"pathAttachment4\",\r",
+									"        \"pathAttachment5\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Validate schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema1);\r",
+									"});\r",
+									"    \r",
+									"//Validate Response body content\r",
+									"// pm.test(\"Newly created Assignment matches request attributes\",() => {\r",
+									"//    var jsonData = pm.response.json(); \r",
+									"//      pm.expect(jsonData).to.haveOwnProperty(\"assignmentId\");\r",
+									"//    pm.expect(jsonData.assignmentName).to.include(\"Jun23-APIc Scripters-SDET-JAVA-660\");\r",
+									"//    pm.expect(jsonData.assignmentDescription).to.include(\"java descitption\");\r",
+									"//    //pm.expect(jsonData.comments).to.include(\"\");\r",
+									"//    pm.expect(jsonData.dueDate).to.include(\"023-06-19T22:02:28.140+00:00\");\r",
+									"//    pm.expect(jsonData.pathAttachment1).to.include(\"Filepath1\");\r",
+									"//    pm.expect(jsonData.pathAttachment2).to.include(\"Filepath2\");\r",
+									"//    pm.expect(jsonData.pathAttachment3).to.include(\"Filepath3\");\r",
+									"//    pm.expect(jsonData.pathAttachment4).to.include(\"Filepath4\");\r",
+									"//    pm.expect(jsonData.pathAttachment5).to.include(\"Filepath5\");\r",
+									"//    pm.expect(jsonData).to.haveOwnProperty(\"batchId\");\r",
+									"//    pm.expect(jsonData.createdBy).to.include(\"U1181\");\r",
+									"//    pm.expect(jsonData.graderId).to.include(\"U1172\");\r",
+									"   \r",
+									"postman.setNextRequest(\"Get Assignment by ID DD\");\r",
+									"// Chaining\r",
+									"var jsondata=pm.response.json();\r",
+									"var NewassignmentId=jsondata.assignmentId;\r",
+									"pm.globals.set(\"AssignmentID\", NewassignmentId);\r",
+									"console.log(NewassignmentId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "e4a66bce-862e-4899-bf50-25f994eab04e",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\r\n  \"assignmentId\": 0,\r\n  \"assignmentName\": \"{{assignmentName}}\",\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"dueDate\": \"2023-06-19T22:02:28.140Z\",\r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Assignment by ID DD",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "437e8b55-b8e0-4d26-ae3d-6c18a4e4d30f",
+								"exec": [
+									"//status code validation\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//check Assignment id  is present\r",
+									"pm.test(\"Check Assignment ID present in response body\", () =>{\r",
+									"    var jsonresponsedata=pm.response.json();\r",
+									"    pm.expect(jsonresponsedata.assignmentId).to.eql(pm.globals.get(\"AssignmentID\"));\r",
+									"});\r",
+									"\r",
+									"//JSON Schema validation\r",
+									"  var schema1 = {\r",
+									"  //\"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"assignmentDescription\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"assignmentId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"assignmentName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"batchId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"comments\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"createdBy\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"graderId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment1\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment2\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment3\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment4\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment5\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"assignmentDescription\",\r",
+									"        \"assignmentId\",\r",
+									"        \"assignmentName\",\r",
+									"        \"batchId\",\r",
+									"        \"comments\",\r",
+									"        \"createdBy\",\r",
+									"        \"dueDate\",\r",
+									"        \"graderId\",\r",
+									"        \"pathAttachment1\",\r",
+									"        \"pathAttachment2\",\r",
+									"        \"pathAttachment3\",\r",
+									"        \"pathAttachment4\",\r",
+									"        \"pathAttachment5\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Validate schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema1);\r",
+									"});\r",
+									"postman.setNextRequest(\"Put Assignment by ID DD\");\r",
+									"    "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "417c60d6-1018-4dd9-9176-0b90f1a254f2",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseurl}}/assignments/{{AssignmentID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Put Assignment by ID DD",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "adb2f3c8-bb9e-4642-bb0c-e53938efebcb",
+								"exec": [
+									"var UpdatedassignmentName= \"Jun23-APIc Scripters-SDET-SQL-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+									"pm.collectionVariables.set(\"UpdatedassignmentDescription\", \"updatedescription\");\r",
+									"pm.globals.set(\"UpdatedassignmentName\",UpdatedassignmentName);\r",
+									"pm.collectionVariables.set(\"UpdatedbatchId\", \"221\" );\r",
+									"pm.collectionVariables.set(\"Updatedcomments\",\"COMMENTS\");\r",
+									"pm.collectionVariables.set(\"UpdatedcreatedBy\", \"U11812\" );\r",
+									"pm.collectionVariables.set(\"UpdateddueDate\",\"2023-06-19T22:02:28.140Z\",);\r",
+									"pm.collectionVariables.set(\"UpdatedgraderId\", \"U1172\");\r",
+									"pm.collectionVariables.set(\"UpdatedpathAttachment1\",\"Filepath1\");\r",
+									"pm.collectionVariables.set(\"UpdatedpathAttachment2\",\"Filepath2\");\r",
+									"pm.collectionVariables.set(\"UpdatedpathAttachment3\",\"Filepath3\");\r",
+									"pm.collectionVariables.set(\"UpdatedpathAttachment4\",\"Filepath4\");\r",
+									"pm.collectionVariables.set(\"UpdatedpathAttachment5\",\"Filepath5\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "07f07e9e-9209-48f6-a7fb-0ae5beb32949",
+								"exec": [
+									"// //Validate Response body content\r",
+									"// pm.test(\"Newly created Assignment matches request attributes\",() => {\r",
+									"//    var jsonData = pm.response.json(); \r",
+									"//      pm.expect(jsonData).to.haveOwnProperty(\"assignmentId\");\r",
+									"//    pm.expect(jsonData.assignmentName).to.include(\"Jun23-EliteForce-SDET - SQL104\");\r",
+									"//    pm.expect(jsonData.assignmentDescription).to.include(\"this is first hackathon\");\r",
+									"//    //pm.expect(jsonData.comments).to.include(\"\");\r",
+									"//    pm.expect(jsonData.dueDate).to.include(\"2023-07-11T14:41:29.516+00:00\");\r",
+									"//    pm.expect(jsonData.pathAttachment1).to.include(\"directional.mpga\");\r",
+									"//    pm.expect(jsonData.pathAttachment2).to.include(\"invoice.weba\");\r",
+									"//    pm.expect(jsonData.pathAttachment3).to.include(\"research_system.acu\");\r",
+									"//    pm.expect(jsonData.pathAttachment4).to.include(\"multi_tasking_target.nlu\");\r",
+									"//    pm.expect(jsonData.pathAttachment5).to.include(\"hawaii_awesome.ssdl\");\r",
+									"//    pm.expect(jsonData).to.haveOwnProperty(\"batchId\");\r",
+									"//    pm.expect(jsonData.createdBy).to.include(\"U3204\");\r",
+									"//    pm.expect(jsonData.graderId).to.include(\"U3204\");\r",
+									"   \r",
+									"// });\r",
+									"postman.setNextRequest(\"Delete Assignment by ID DD\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "08d10657-9e9a-4f01-8706-b7f253b3ba83",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\r\n  \"assignmentId\": 0,\r\n  \"assignmentName\": \"{{assignmentName}}\",\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"dueDate\": \"2023-06-19T22:02:28.140Z\",\r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments/{{AssignmentID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Assignment by ID DD",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "347544c1-920d-4464-9161-c30c1807b749",
+								"exec": [
+									"\r",
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"404 Not Found with message and boolean success details- valid Assignment Id \", () =>{\r",
+									"    pm.response.to.have.status(200);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include('Assignment deleted successfully');\r",
+									"});\r",
+									"postman.setNextRequest(\"Create Assignment  dynamic chaininng\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "2a45e88a-56fe-47aa-aaf0-16f69e1fe7e1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseurl}}/assignments/{{AssignmentID}}"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "e50bbf72-ca48-4663-a9ad-5108d745d598"
+		},
+		{
+			"name": "Assigment Chaining(Dynamic Variables)",
+			"item": [
+				{
+					"name": "Create Assignment  dynamic chaininng",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "1dbc698c-b36d-4363-bfd0-54deae47412f",
+								"exec": [
+									"var assignmentName= \"Jun23-APIc Scripters-SDET-SQL-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+									"pm.collectionVariables.set(\"assignmentDescription\", \"description\");\r",
+									"//pm.collectionVariables.set( \"assignmentId\",0);\r",
+									"pm.globals.set(\"assignmentName\", assignmentName);\r",
+									"pm.collectionVariables.set(\"batchId\", \"220\" );\r",
+									"pm.collectionVariables.set(\"comments\",\"\");\r",
+									"pm.collectionVariables.set(\"createdBy\", \"U1181\" );\r",
+									"pm.collectionVariables.set(\"dueDate\",\"2023-06-19T22:02:28.140Z\",);\r",
+									"pm.collectionVariables.set(\"graderId\", \"U1172\");\r",
+									"pm.collectionVariables.set(\"pathAttachment1\",\"Filepath1\");\r",
+									"pm.collectionVariables.set(\"pathAttachment2\",\"Filepath2\");\r",
+									"pm.collectionVariables.set(\"pathAttachment3\",\"Filepath3\");\r",
+									"pm.collectionVariables.set(\"pathAttachment4\",\"Filepath4\");\r",
+									"pm.collectionVariables.set(\"pathAttachment5\",\"Filepath5\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "1da40180-8529-407c-a018-7c1f322d4f36",
+								"exec": [
+									"//Status Code Validation\r",
+									"pm.test(\"Status code is 201\", () => {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Check Response Time\r",
+									"pm.test(\"Response Time is less than 500ms\", () => {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"//JSON Schema validation\r",
+									"  var schema1 = {\r",
+									"  //\"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"assignmentDescription\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"assignmentId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"assignmentName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"batchId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"comments\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"createdBy\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"graderId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment1\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment2\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment3\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment4\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment5\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"assignmentDescription\",\r",
+									"        \"assignmentId\",\r",
+									"        \"assignmentName\",\r",
+									"        \"batchId\",\r",
+									"        \"comments\",\r",
+									"        \"createdBy\",\r",
+									"        \"dueDate\",\r",
+									"        \"graderId\",\r",
+									"        \"pathAttachment1\",\r",
+									"        \"pathAttachment2\",\r",
+									"        \"pathAttachment3\",\r",
+									"        \"pathAttachment4\",\r",
+									"        \"pathAttachment5\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Validate schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema1);\r",
+									"});\r",
+									"    \r",
+									" var jsonData=pm.response.json();\r",
+									" var dc_ass_id=jsonData.assignmentId;\r",
+									" pm.globals.set(\"DC_Assigment_ID\",dc_ass_id);\r",
+									" console.log(dc_ass_id);\r",
+									"   \r",
+									" postman.setNextRequest(\"Get Assignment by ID dynamic chaining\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "b614489d-5252-4ba0-9877-dd698d30b315",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\r\n  //\"assignmentId\": 0,\r\n  \"assignmentName\": \"{{assignmentName}}\",\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"dueDate\": \"2023-06-19T22:02:28.140Z\",\r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"{{pathAttachment1}}\",\r\n  \"pathAttachment2\": \"{{pathAttachment2}}\",\r\n  \"pathAttachment3\": \"{{pathAttachment3}}\",\r\n  \"pathAttachment4\": \"{{pathAttachment4}}\",\r\n  \"pathAttachment5\": \"{{pathAttachment5}}\" }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Assignment by ID dynamic chaining",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "72c2e10e-4026-441f-88a9-c30765ee2be7",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"//check BatchID present\r",
+									"pm.test(\"Check Assignment ID present in response body\", () =>{\r",
+									"    var jsondata=pm.response.json();\r",
+									"    pm.expect(jsondata.assignmentId).to.eql(pm.globals.get(\"DC_Assigment ID\"));\r",
+									"});\r",
+									"\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Validate Response time\r",
+									"pm.test(\"Response time is less than 1000ms\", () => {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"//JSON Schema validation\r",
+									"  var schema1 = {\r",
+									"  //\"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"assignmentDescription\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"assignmentId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"assignmentName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"batchId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"comments\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"createdBy\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"graderId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment1\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment2\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment3\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment4\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment5\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"assignmentDescription\",\r",
+									"        \"assignmentId\",\r",
+									"        \"assignmentName\",\r",
+									"        \"batchId\",\r",
+									"        \"comments\",\r",
+									"        \"createdBy\",\r",
+									"        \"dueDate\",\r",
+									"        \"graderId\",\r",
+									"        \"pathAttachment1\",\r",
+									"        \"pathAttachment2\",\r",
+									"        \"pathAttachment3\",\r",
+									"        \"pathAttachment4\",\r",
+									"        \"pathAttachment5\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Validate schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema1);\r",
+									"});\r",
+									"postman.setNextRequest(\"Update batch dynamic chaining\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "d2964f10-7a7d-4a2f-994d-d7609815c4c1",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{baseurl}}/assignments/{{DC_Assigment_ID}}\n "
+					},
+					"response": []
+				},
+				{
+					"name": "Update batch dynamic chaining",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "36feb3e7-f062-4ec2-b2e8-b0f609657dc3",
+								"exec": [
+									"var UpdatedassignmentName= \"Jun23-APIc Scripters-SDET-SQL-\"+ pm.variables.replaceIn(\"{{$randomInt}}\");\r",
+									"//pm.collectionVariables.set(\"ssignmentDescription\",\"assignemnt description\");\r",
+									"pm.globals.set(\"UpdatedassignmentName\",UpdatedassignmentName);\r",
+									"//pm.collectionVariables.set(\"UpdatedbatchId\", \"221\" );\r",
+									"//pm.collectionVariables.set(\"Updatedcomments\",\"COMMENTS\");\r",
+									"// pm.collectionVariables.set(\"UpdatedcreatedBy\", \"U11812\" );\r",
+									"// pm.collectionVariables.set(\"UpdateddueDate\",\"2023-06-19T22:02:28.140Z\",);\r",
+									"// pm.collectionVariables.set(\"UpdatedgraderId\", \"U1172\");\r",
+									"// pm.collectionVariables.set(\"UpdatedpathAttachment1\",\"Filepath1\");\r",
+									"// pm.collectionVariables.set(\"UpdatedpathAttachment2\",\"Filepath2\");\r",
+									"// pm.collectionVariables.set(\"UpdatedpathAttachment3\",\"Filepath3\");\r",
+									"// pm.collectionVariables.set(\"UpdatedpathAttachment4\",\"Filepath4\");\r",
+									"//pm.collectionVariables.set(\"pathAttachment5\",\"Filepath5\");\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "e9522c81-ab47-4bf0-ae7a-9a42e809d161",
+								"exec": [
+									"\r",
+									"//Status Code Validation\r",
+									"pm.test(\"Status code is 200\", () => {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"//Check Header is present or not\r",
+									"pm.test(\"Content-Type Header is present\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});\r",
+									"\r",
+									"//Check Header Value\r",
+									"pm.test(\"Content-Type Header is application-json\", () => {\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json');\r",
+									"});\r",
+									"\r",
+									"//Check Response Time\r",
+									"pm.test(\"Response Time is less than 500ms\", () => {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"//JSON Schema validation\r",
+									"  var schema1 = {\r",
+									"  //\"type\": \"array\",\r",
+									"  \"items\": [\r",
+									"    {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"assignmentDescription\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"assignmentId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"assignmentName\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"batchId\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"comments\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"createdBy\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"dueDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"graderId\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment1\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment2\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment3\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment4\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"pathAttachment5\": {\r",
+									"          \"type\": \"string\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"assignmentDescription\",\r",
+									"        \"assignmentId\",\r",
+									"        \"assignmentName\",\r",
+									"        \"batchId\",\r",
+									"        \"comments\",\r",
+									"        \"createdBy\",\r",
+									"        \"dueDate\",\r",
+									"        \"graderId\",\r",
+									"        \"pathAttachment1\",\r",
+									"        \"pathAttachment2\",\r",
+									"        \"pathAttachment3\",\r",
+									"        \"pathAttachment4\",\r",
+									"        \"pathAttachment5\"\r",
+									"      ]\r",
+									"    }\r",
+									"  ]\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Validate schema\", () => {\r",
+									"pm.response.to.have.jsonSchema(schema1);\r",
+									"});\r",
+									"    \r",
+									"//Validate Response body content\r",
+									"pm.test(\"Newly created Assignment matches request attributes\",() => {\r",
+									"   var jsonData = pm.response.json(); \r",
+									"     pm.expect(jsonData).to.haveOwnProperty(\"assignmentId\");\r",
+									"   pm.expect(jsonData.assignmentName).to.include(\"Jun23-APIc Scripters\");\r",
+									"   //pm.expect(jsonData.assignmentDescription).to.include(\"this is first hackathon\");\r",
+									"   //pm.expect(jsonData.comments).to.include(\"\");\r",
+									"   //pm.expect(jsonData.dueDate).to.include(\"2023-06-28T14:41:29.516+00:00\");\r",
+									"   //pm.expect(jsonData.pathAttachment1).to.include(\"directional.mpga\");\r",
+									"   //pm.expect(jsonData.pathAttachment2).to.include(\"invoice.weba\");\r",
+									"   //pm.expect(jsonData.pathAttachment3).to.include(\"research_system.acu\");\r",
+									"   //pm.expect(jsonData.pathAttachment4).to.include(\"multi_tasking_target.nlu\");\r",
+									"   //pm.expect(jsonData.pathAttachment5).to.include(\"attachment\");\r",
+									"   //pm.expect(jsonData).to.haveOwnProperty(\"batchId\");\r",
+									"   //pm.expect(jsonData.createdBy).to.include(\"U1181\");\r",
+									"   //pm.expect(jsonData.graderId).to.include(\"U3204\");\r",
+									"   \r",
+									"});\r",
+									"\r",
+									"postman.setNextRequest(\"Delete Assignemnt ID Dynamic chaining\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "8fe9bb01-dcee-4fc2-9b86-9bed351e75eb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"assignmentDescription\": \"{{assignmentDescription}}\",\r\n  \"assignmentId\": 0,\r\n  \"assignmentName\": \"{{UpdatedassignmentName}}\",\r\n  \"batchId\": \"{{batchId}}\",\r\n  \"comments\": \"{{comments}}\",\r\n  \"createdBy\": \"{{createdBy}}\",\r\n  \"dueDate\": \"2023-06-28T23:28:19.231Z\",\r\n  \"graderId\": \"{{graderId}}\",\r\n  \"pathAttachment1\": \"string\",\r\n  \"pathAttachment2\": \"string\",\r\n  \"pathAttachment3\": \"string\",\r\n  \"pathAttachment4\": \"string\",\r\n  \"pathAttachment5\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{baseurl}}/assignments/{{DC_Assigment_ID}}"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Assignemnt ID Dynamic chaining",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "c8954132-a189-4d92-bf2f-100acadb0e78",
+								"exec": [
+									"//status code validation & Message & Boolean success validation\r",
+									"const jsondata = pm.response.json();\r",
+									"pm.test(\"404 Not Found with message and boolean success details- valid Assignment Id \", () =>{\r",
+									"    pm.response.to.have.status(200);;\r",
+									"    pm.expect(jsondata).to.have.property('success');\r",
+									"    pm.expect(jsondata).to.have.property('message');\r",
+									"    pm.expect(jsondata.message).to.include('Assignment deleted successfully');\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"_postman_id": "a880c833-0395-4875-921c-caab11fb018c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "{{baseurl}}/assignments/{{DC_Assigment ID}}"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "d1038556-9ee1-4ac7-b0b2-1e1410b00bea"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "28fdf5f5-e245-4fb7-8e6e-d62de4c1e44b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "a2116970-77a9-4ac5-ab3b-7c44f087ce1c",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "faa8b094-de91-4131-a8db-7e121b3ec73f",
+			"key": "assigmentID",
+			"value": "1201",
+			"type": "string"
+		},
+		{
+			"id": "338683c7-d137-4636-bd23-c43db94f9fe1",
+			"key": "NegassigmentID",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"id": "50d8e6ab-4ef5-477c-9a94-d023c091df67",
+			"key": "batchID",
+			"value": "2",
+			"type": "string"
+		},
+		{
+			"id": "0f51cea9-5f08-43e6-8548-22db007a4f19",
+			"key": "NegbatchID",
+			"value": "15",
+			"type": "string"
+		},
+		{
+			"id": "ff1a5294-f2ce-4601-b189-6a50b0e11fb9",
+			"key": "assignmentDescription",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "184d0060-b79e-439c-8cdf-a6b3777f88ed",
+			"key": "assignmentId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "4f3aa7d2-8d08-4665-bbe2-e1f88c3640c7",
+			"key": "batchId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "52ceb2f3-cb83-4892-90a1-b611e6391e9d",
+			"key": "comments",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "f3024e0e-63e5-451f-8234-081c98b78c3d",
+			"key": "createdBy",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "ebbaad12-7d8c-4a7b-95d5-5c814947fe7b",
+			"key": "dueDate",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "5ba9b370-2f83-4876-9a2f-b75da6fb8edd",
+			"key": "graderId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "f1ff96ad-f338-480c-892e-9f6fa0e8c13f",
+			"key": "pathAttachment1",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "e5c6c0e3-5bd8-49af-805d-e3b8af042619",
+			"key": "pathAttachment2",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "1654c8c8-d8ba-496b-8408-f837886bda03",
+			"key": "pathAttachment3",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "79287940-4992-49b8-9fa3-cfcb3965fff3",
+			"key": "pathAttachment4",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "f35433a4-bb27-43bf-ba61-93708246ae89",
+			"key": "pathAttachment5",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "86254a74-2195-4fa8-9ef9-036ff7518700",
+			"key": "UpdatedassignmentDescription",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "ba79132c-96f4-4734-940a-2b1e2ab948ea",
+			"key": "UpdatedbatchId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "ad17189b-5692-4b9f-bf1b-1522a58a67eb",
+			"key": "Updatedcomments",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "c17cd479-fb8f-4f73-a478-1b1668e74b5d",
+			"key": "UpdatedcreatedBy",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "077ceb47-1129-47bf-931b-f239c815701a",
+			"key": "UpdateddueDate",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "aed9941b-995a-4748-bd52-bf16e880f351",
+			"key": "UpdatedgraderId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "bf54db9b-1026-40c0-b710-fdd6e1ccadc3",
+			"key": "UpdatedpathAttachment1",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "5477e9ab-8957-47a7-af5d-c3a5c6b65f5c",
+			"key": "UpdatedpathAttachment2",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "15e1b178-53f1-4d77-af92-ddfaa168432a",
+			"key": "UpdatedpathAttachment3",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "a9cde0ef-f66e-4f45-bbdc-bb479e918b5a",
+			"key": "UpdatedpathAttachment4",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "77dfc6bd-dec4-4930-9cf2-dbeff1f00d9e",
+			"key": "UpdatedpathAttachment5",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "8dd6d147-c093-49f7-b1d1-f4c67a13516c",
+			"key": "Neg_Assign_mentID",
+			"value": "124",
+			"type": "string"
+		},
+		{
+			"id": "7c7f6a6c-4106-4da1-bc93-96e8ce01efb9",
+			"key": "batch_ID",
+			"value": "3692",
+			"type": "string"
+		},
+		{
+			"id": "85bd9f84-3e08-4845-8960-4b3274ae6739",
+			"key": "ssignmentDescription",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
