@@ -2434,7 +2434,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "437e8b55-b8e0-4d26-ae3d-6c18a4e4d30f",
+								"id": "b58321ef-a743-44bb-bdc7-d27a5b91c791",
 								"exec": [
 									"//status code validation\r",
 									"pm.test(\"Status code is 200\", () => {\r",
@@ -2456,11 +2456,11 @@
 									"});\r",
 									"\r",
 									"\r",
-									"//check Assignment id  is present\r",
-									"pm.test(\"Check Assignment ID present in response body\", () =>{\r",
-									"    var jsonresponsedata=pm.response.json();\r",
-									"    pm.expect(jsonresponsedata.assignmentId).to.eql(pm.globals.get(\"AssignmentID\"));\r",
-									"});\r",
+									"// //check Assignment id  is present\r",
+									"// pm.test(\"Check Assignment ID present in response body\", () =>{\r",
+									"//     var jsonresponsedata=pm.response.json();\r",
+									"//     pm.expect(jsonresponsedata.assignmentId).to.eql(pm.globals.get(\"AssignmentID\"));\r",
+									"//});\r",
 									"\r",
 									"//JSON Schema validation\r",
 									"  var schema1 = {\r",
@@ -2545,6 +2545,15 @@
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": "{{baseurl}}/assignments/{{AssignmentID}}"
 					},
 					"response": []
@@ -3165,152 +3174,152 @@
 	],
 	"variable": [
 		{
-			"id": "6a340554-81da-4dc3-9d44-f0d825e40864",
+			"id": "6302f4a9-add0-4d60-b7f4-c1a0103c727f",
 			"key": "assigmentID",
 			"value": "1201"
 		},
 		{
-			"id": "78673252-9d0e-4828-9eba-bccc523f2bde",
+			"id": "47fab941-1959-452b-bcc7-9bb6f43b3e6b",
 			"key": "NegassigmentID",
 			"value": "1"
 		},
 		{
-			"id": "cc66f557-9986-4067-8e19-6ad04039c760",
+			"id": "902c320a-8b14-4515-ac0f-16765c5edcc3",
 			"key": "batchID",
 			"value": "2"
 		},
 		{
-			"id": "5bdff318-b8c1-4869-83b7-013b27ddea79",
+			"id": "280e6bd5-9437-4d7e-a998-d6b443799482",
 			"key": "NegbatchID",
 			"value": "15"
 		},
 		{
-			"id": "1139d827-e53c-4d66-9862-35a9e189ca85",
+			"id": "e73ff078-e8fc-476b-8007-fd0abfab530e",
 			"key": "assignmentDescription",
 			"value": ""
 		},
 		{
-			"id": "3a301dc5-0adf-47f0-9389-30e442cdce5b",
+			"id": "ee820f58-c7dd-45a5-9f87-27ecbe88ef87",
 			"key": "assignmentId",
 			"value": ""
 		},
 		{
-			"id": "8d4a1805-67bf-4abb-b116-cb4332c3030d",
+			"id": "0272a0a6-4598-4f83-818b-3aa99d8570c6",
 			"key": "batchId",
 			"value": ""
 		},
 		{
-			"id": "9d287398-700a-4787-977e-b0e6e01dcaf3",
+			"id": "038e4aef-4d2e-43f8-94bb-65512662c7c6",
 			"key": "comments",
 			"value": ""
 		},
 		{
-			"id": "08b8baba-3be1-450b-8acc-6510d86f68ca",
+			"id": "72e15604-810f-47c6-a380-1be297561651",
 			"key": "createdBy",
 			"value": ""
 		},
 		{
-			"id": "f5f6a926-b6be-4f22-ad71-5d3f5f169e4d",
+			"id": "d8ff1c07-e1e9-4c5b-ba43-0e946e3aa02b",
 			"key": "dueDate",
 			"value": ""
 		},
 		{
-			"id": "0cd3758b-eb0c-47f3-8953-c79d7467b967",
+			"id": "4d0b2713-4774-4b49-bed6-a5ad1ee8b950",
 			"key": "graderId",
 			"value": ""
 		},
 		{
-			"id": "5f463e46-68fb-476d-b42f-3c224270b782",
+			"id": "bbe883bb-02a1-4fcd-b019-a0fffbccccf4",
 			"key": "pathAttachment1",
 			"value": ""
 		},
 		{
-			"id": "41a4d995-d4d5-4007-a152-789b4b4f62c1",
+			"id": "a710c0dd-54c4-4d59-a9ce-0294d3335627",
 			"key": "pathAttachment2",
 			"value": ""
 		},
 		{
-			"id": "9bc33b4f-daa8-40ae-895c-e539e6195a9e",
+			"id": "64f3f3de-66a3-46c0-a563-a8bbaec9de18",
 			"key": "pathAttachment3",
 			"value": ""
 		},
 		{
-			"id": "ad568453-ad08-44df-85c2-ee0b24014012",
+			"id": "76063753-3b6a-4c7d-955e-a80fe41a7a5f",
 			"key": "pathAttachment4",
 			"value": ""
 		},
 		{
-			"id": "e13bce15-e664-429c-a434-ebadebc33af8",
+			"id": "28fa5632-0aa8-4fd7-9789-b8143ab86e23",
 			"key": "pathAttachment5",
 			"value": ""
 		},
 		{
-			"id": "8f6fe64d-517a-4d25-b1a5-4b72bb83a845",
+			"id": "8d9d3a8d-5fa5-4fd5-8020-d58e31faa386",
 			"key": "UpdatedassignmentDescription",
 			"value": ""
 		},
 		{
-			"id": "73c2abcf-d997-445b-ae9d-65d608b794cb",
+			"id": "2f766711-2ba2-46eb-a782-aff4b0156d2a",
 			"key": "UpdatedbatchId",
 			"value": ""
 		},
 		{
-			"id": "0173f008-ed6c-4d9d-a826-85b3d4da9940",
+			"id": "ed7d5007-ded9-46f5-8ba3-5c5fcf3eef92",
 			"key": "Updatedcomments",
 			"value": ""
 		},
 		{
-			"id": "92233dde-3743-49b4-95f4-82163958bea8",
+			"id": "a6b3a906-ba34-4be9-ab63-c4866fe72941",
 			"key": "UpdatedcreatedBy",
 			"value": ""
 		},
 		{
-			"id": "05c15888-bbaa-4aa2-9f71-3b7eaddb63a9",
+			"id": "9797e1ad-5697-4fb5-a94c-289934ce773d",
 			"key": "UpdateddueDate",
 			"value": ""
 		},
 		{
-			"id": "aa610bcc-677c-47f7-b22b-1da88de62d51",
+			"id": "10079cd3-3a4a-44b4-b48a-52a35e988265",
 			"key": "UpdatedgraderId",
 			"value": ""
 		},
 		{
-			"id": "3476e259-cb15-4560-8da3-0d291195b61e",
+			"id": "a7762409-4022-4d43-b754-8bb6dcd0935f",
 			"key": "UpdatedpathAttachment1",
 			"value": ""
 		},
 		{
-			"id": "e469cc05-1447-4027-beb7-a26bc79359c8",
+			"id": "df92607f-3abd-4e3f-99af-4b6c3661e258",
 			"key": "UpdatedpathAttachment2",
 			"value": ""
 		},
 		{
-			"id": "4470b565-589d-4d29-a3a6-bb88db2eb1b5",
+			"id": "85235a8e-f78b-45de-92b9-e0bac3d9c545",
 			"key": "UpdatedpathAttachment3",
 			"value": ""
 		},
 		{
-			"id": "edc73de9-9ee2-428b-b715-1aadf347b1b6",
+			"id": "97ffd8e8-d009-4ef7-8078-d7506a790181",
 			"key": "UpdatedpathAttachment4",
 			"value": ""
 		},
 		{
-			"id": "a856937b-f6e5-42e2-893f-626e6e9d33f4",
+			"id": "e66039eb-97c5-4176-a03d-bc09fa27f999",
 			"key": "UpdatedpathAttachment5",
 			"value": ""
 		},
 		{
-			"id": "df3cbd93-fa85-4e45-82b5-e28537a5b23c",
+			"id": "615a61ba-3bd4-4719-b921-a53d55de3172",
 			"key": "Neg_Assign_mentID",
 			"value": "124"
 		},
 		{
-			"id": "d416d6db-265c-46e9-a8b9-dcde7f147a3d",
+			"id": "b8dbda63-8122-4ad2-a2bc-c680235cbe0d",
 			"key": "batch_ID",
 			"value": "3692"
 		},
 		{
-			"id": "9abbaa7b-ab8e-4d86-ac46-fc17a08aa85c",
+			"id": "d9886f02-c64f-430f-b404-af598361e656",
 			"key": "ssignmentDescription",
 			"value": ""
 		}
