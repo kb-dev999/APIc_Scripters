@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "798b44df-938a-4cfb-b5a7-41391876b0e7",
-		"name": "DDD- Program",
+		"name": "Program -DDT",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
@@ -124,7 +124,7 @@
 							}
 						}
 					],
-					"_postman_id": "32a7c139-4578-4ef9-b6ea-e23ee839f68b",
+					"id": "32a7c139-4578-4ef9-b6ea-e23ee839f68b",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -265,7 +265,7 @@
 							}
 						}
 					],
-					"_postman_id": "f7c28f0c-27c0-4920-91d9-85743b62b837",
+					"id": "f7c28f0c-27c0-4920-91d9-85743b62b837",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -293,8 +293,7 @@
 							"variable": [
 								{
 									"key": "programId",
-									"value": "{{programIdDDD}}",
-									"type": "string"
+									"value": "{{programIdDDD}}"
 								}
 							]
 						}
@@ -342,7 +341,7 @@
 							}
 						}
 					],
-					"_postman_id": "8e36064f-03d3-4f69-90a0-dda30c480001",
+					"id": "8e36064f-03d3-4f69-90a0-dda30c480001",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -370,8 +369,7 @@
 							"variable": [
 								{
 									"key": "programid",
-									"value": "{{programIdDDD}}",
-									"type": "string"
+									"value": "{{programIdDDD}}"
 								}
 							]
 						}
@@ -379,7 +377,7 @@
 					"response": []
 				}
 			],
-			"_postman_id": "05c3da5a-ba17-4f06-99b7-1e837119b6d0"
+			"id": "05c3da5a-ba17-4f06-99b7-1e837119b6d0"
 		}
 	]
 }
