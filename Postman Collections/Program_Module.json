@@ -385,7 +385,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"programDescription\": \"{{$randomJobDescriptor}}\",\r\n\"programName\": \"{{$randomJobArea}}\",\r\n \"programStatus\": null\r\n}\r\n//run twice if it does not work once",
+							"raw": "{\r\n  \"programDescription\": \"{{$randomJobDescriptor}}\",\r\n\"programName\": \"{{$randomJobArea}}\",\r\n \"programStatus\": null\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
