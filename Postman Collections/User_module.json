@@ -757,23 +757,25 @@
 									"\r",
 									"\r",
 									"if(currSelectedRole === 'R01'){\r",
-									"    pm.environment.set(\"roleName\", \"ROLE_ADMIN\");\r",
+									"    pm.environment.set(\"current_roleName\", \"ROLE_ADMIN\");\r",
 									"}\r",
 									"else if(currSelectedRole === 'R02'){\r",
-									"    pm.environment.set(\"roleName\", \"ROLE_STAFF\");\r",
+									"    pm.environment.set(\"current_roleName\", \"ROLE_STAFF\");\r",
+									"}else{\r",
+									"    pm.environment.set(\"current_roleName\", \"ROLE_STUDENT\");\r",
 									"}\r",
 									"\r",
 									"//Role_Name \r",
 									"\r",
-									"var roleName = pm.environment.get(\"roleName\");\r",
-									"if(!roleName){\r",
-									"    roleName=[\"ROLE_ADMIN\", \"ROLE_STAFF\",\"ROLE_STUDENT\"];\r",
-									"}\r",
-									"var current_roleName= roleName.shift();\r",
-									"console.log(\"array now is\",roleName);\r",
-									"console.log(\"currSelectedRoleName now is \", current_roleName);\r",
-									"pm.environment.set(\"current_roleName\", current_roleName);\r",
-									"pm.environment.set(\"roleName\", roleName);"
+									"// var roleName = pm.environment.get(\"roleName\");\r",
+									"// if(!roleName){\r",
+									"//     roleName=[\"ROLE_ADMIN\", \"ROLE_STAFF\",\"ROLE_STUDENT\"];\r",
+									"// }\r",
+									"// var current_roleName= roleName.shift();\r",
+									"// console.log(\"array now is\",roleName);\r",
+									"// console.log(\"currSelectedRoleName now is \", current_roleName);\r",
+									"// pm.environment.set(\"current_roleName\", current_roleName);\r",
+									"// pm.environment.set(\"roleName\", roleName);"
 								],
 								"type": "text/javascript"
 							}
@@ -2290,46 +2292,46 @@
 	],
 	"variable": [
 		{
-			"id": "0268624d-d5b0-47d2-9faa-d27bfbaa5ce7",
+			"id": "b10f9f6c-1bd2-41d2-9909-91054a82ab3c",
 			"key": "BaseURL",
 			"value": "lms-api-hackathon-june2023-930a8b0f895d.herokuapp.com",
 			"type": "string",
 			"disabled": true
 		},
 		{
-			"id": "1788d87d-04ca-49bb-8d05-e12d6f59fc15",
+			"id": "55168079-4689-45be-b3a2-d2a594946fe3",
 			"key": "ROLE_ID_R01",
 			"value": "",
 			"disabled": true
 		},
 		{
-			"id": "87f35d43-438d-4648-b70d-685b7c9549bf",
+			"id": "14e011b6-5a5f-46b6-9cbc-4e5a18ff8bd4",
 			"key": "ROLE_ID_R01",
 			"value": ""
 		},
 		{
-			"id": "ee105beb-98e9-4d01-ad0c-ddb269ee4f02",
+			"id": "a9195ec2-cd8f-403d-89c6-9957eb7228fc",
 			"key": "UserId",
 			"value": "U4525"
 		},
 		{
-			"id": "25bfe02b-3c52-4a92-b18f-83bc62bd6d30",
+			"id": "e06a4132-19a1-4df7-8af4-fae8fb33f028",
 			"key": "newTZ",
 			"value": "MST",
 			"type": "string"
 		},
 		{
-			"id": "d4a0b1e4-3299-4383-bcf8-ee0801e7a409",
+			"id": "61cade79-7762-402b-adbf-a462a0f8b738",
 			"key": "UserId1",
 			"value": "Sid"
 		},
 		{
-			"id": "132f5b24-d066-4c30-9b72-a635f2a6e66a",
+			"id": "165db17e-4593-4fc8-a145-b29db4524563",
 			"key": "userId1",
 			"value": ""
 		},
 		{
-			"id": "51651f90-007a-4880-923b-20a5733ee30d",
+			"id": "183e64b2-6d33-4333-850c-b0cc71054ded",
 			"key": "euid",
 			"value": "Sid"
 		}
