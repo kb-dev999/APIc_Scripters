@@ -139,7 +139,8 @@
 					],
 					"id": "f7ea24a3-cc18-4fd6-8f4c-4caf004e9914",
 					"protocolProfileBehavior": {
-						"disableBodyPruning": true
+						"disableBodyPruning": true,
+						"disableUrlEncoding": true
 					},
 					"request": {
 						"method": "POST",
